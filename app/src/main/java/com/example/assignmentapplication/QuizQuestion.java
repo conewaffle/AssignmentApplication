@@ -1,6 +1,9 @@
 package com.example.assignmentapplication;
 
-public class QuizQuestion {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class QuizQuestion implements Parcelable {
     private String question;
     private String answerA;
     private String answerB;
@@ -20,6 +23,42 @@ public class QuizQuestion {
         this.answerD = answerD;
         this.correctAnswer = correctAnswer;
     }
+
+    protected QuizQuestion(Parcel in) {
+        question = in.readString();
+        answerA = in.readString();
+        answerB = in.readString();
+        answerC = in.readString();
+        answerD = in.readString();
+        correctAnswer = in.readInt();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(question);
+        dest.writeString(answerA);
+        dest.writeString(answerB);
+        dest.writeString(answerC);
+        dest.writeString(answerD);
+        dest.writeInt(correctAnswer);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<QuizQuestion> CREATOR = new Creator<QuizQuestion>() {
+        @Override
+        public QuizQuestion createFromParcel(Parcel in) {
+            return new QuizQuestion(in);
+        }
+
+        @Override
+        public QuizQuestion[] newArray(int size) {
+            return new QuizQuestion[size];
+        }
+    };
 
     public String getQuestion() {
         return question;
