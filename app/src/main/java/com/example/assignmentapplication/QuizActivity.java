@@ -2,6 +2,7 @@ package com.example.assignmentapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -16,6 +17,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class QuizActivity extends AppCompatActivity {
+
+    public static final String EXTRA_SCORE = "extraScore";
+
     private TextView textQuestion;
     private TextView textScore;
     private TextView textQuestionCount;
@@ -155,6 +159,9 @@ public class QuizActivity extends AppCompatActivity {
 
     }
     private void finishQuiz(){
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra(EXTRA_SCORE, score);
+        setResult(RESULT_OK, resultIntent);
         finish();
     }
 
