@@ -50,9 +50,9 @@ public class QuizDbHelper extends SQLiteOpenHelper {
     }
 
     private void fillQuestionsTable() {
-        QuizQuestion q1 = new QuizQuestion("A is correct", "A", "B", "C", "D", 1);
+        QuizQuestion q1 = new QuizQuestion("What style of referencing is used at UNSW", "APA", "Harvard", "MLA", "Chicago", 1);
         addQuizQuestion(q1);
-        QuizQuestion q2 = new QuizQuestion("B is correct", "A", "B", "C", "D", 2);
+        QuizQuestion q2 = new QuizQuestion("Example Question hahaha", "A", "B", "C", "D", 2);
         addQuizQuestion(q2);
         QuizQuestion q3 = new QuizQuestion("C is correct", "A", "B", "C", "D", 3);
         addQuizQuestion(q3);

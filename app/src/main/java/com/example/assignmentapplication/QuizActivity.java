@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -15,10 +16,12 @@ import android.widget.Toast;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class QuizActivity extends AppCompatActivity {
 
     public static final String EXTRA_SCORE = "extraScore";
+    private static final long COUNTDOWN_IN_MILLIS = 20000;
 
     private TextView textQuestion;
     private TextView textScore;
@@ -32,6 +35,10 @@ public class QuizActivity extends AppCompatActivity {
     private Button buttonConfirm;
 
     private ColorStateList textColorDefaultRb;
+    private ColorStateList textColorDefaultCd;
+
+    private CountDownTimer countDownTimer;
+    private long timeLeftinMillis;
 
     private List<QuizQuestion> questionList;
     private int questionCounter;
@@ -40,6 +47,8 @@ public class QuizActivity extends AppCompatActivity {
 
     private int score;
     private boolean answered;
+
+    private long backPressedTime;
 
 
     @Override
@@ -59,6 +68,7 @@ public class QuizActivity extends AppCompatActivity {
         buttonConfirm = findViewById(R.id.nextButton);
 
         textColorDefaultRb = rb1.getTextColors();
+        textColorDefaultCd = textCountDown.getTextColors();
 
 
         //change from sqlite boilerplate to ROOM
@@ -106,14 +116,52 @@ public class QuizActivity extends AppCompatActivity {
             textQuestionCount.setText("Question: " + questionCounter + "/" + questionCountTotal);
             answered = false;
             buttonConfirm.setText("Confirm");
+
+            timeLeftinMillis = COUNTDOWN_IN_MILLIS;
+            startCountDown();
         } else {
             finishQuiz();
         }
 
     }
 
+    private void startCountDown(){
+        countDownTimer = new CountDownTimer(timeLeftinMillis, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timeLeftinMillis = millisUntilFinished;
+                updateCountDownText();
+            }
+
+            @Override
+            public void onFinish() {
+                timeLeftinMillis = 0;
+                updateCountDownText();
+                checkAnswer();
+            }
+        }.start();
+    }
+
+    private void updateCountDownText(){
+        int minutes = (int)(timeLeftinMillis/1000)/60;
+        int seconds = (int)(timeLeftinMillis/1000)%60;
+
+        String timeFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+
+        textCountDown.setText(timeFormatted);
+
+        if (timeLeftinMillis<10000){
+            textCountDown.setTextColor(Color.RED);
+        } else {
+            textCountDown.setTextColor(textColorDefaultCd);
+        }
+    }
+
     private void checkAnswer(){
         answered = true;
+
+        countDownTimer.cancel();
+
         RadioButton rbSelected = findViewById(rbGroup.getCheckedRadioButtonId());
         int answerNo = rbGroup.indexOfChild(rbSelected) + 1;
 
@@ -165,5 +213,22 @@ public class QuizActivity extends AppCompatActivity {
         finish();
     }
 
+    @Override
+    public void onBackPressed(){
+        if(backPressedTime+2000>System.currentTimeMillis()){
+            finishQuiz();
+        } else {
+            Toast.makeText(this, "Press back again to finish", Toast.LENGTH_SHORT).show();
+        }
+        backPressedTime = System.currentTimeMillis();
 
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if(countDownTimer!=null){
+            countDownTimer.cancel();
+        }
+    }
 }
