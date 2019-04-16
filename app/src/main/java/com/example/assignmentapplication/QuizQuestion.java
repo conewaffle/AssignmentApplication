@@ -6,13 +6,13 @@ public class QuizQuestion {
     private String answerB;
     private String answerC;
     private String answerD;
-    private String correctAnswer;
+    private int correctAnswer;
 
     public QuizQuestion(){
 
     }
 
-    public QuizQuestion(String question, String answerA, String answerB, String answerC, String answerD, String correctAnswer){
+    public QuizQuestion(String question, String answerA, String answerB, String answerC, String answerD, int correctAnswer){
         this.question = question;
         this.answerA = answerA;
         this.answerB = answerB;
@@ -61,11 +61,11 @@ public class QuizQuestion {
         this.answerD = answerD;
     }
 
-    public String getCorrectAnswer() {
+    public int getCorrectAnswer() {
         return correctAnswer;
     }
 
-    public void setCorrectAnswer(String correctAnswer) {
+    public void setCorrectAnswer(int correctAnswer) {
         this.correctAnswer = correctAnswer;
     }
 }
