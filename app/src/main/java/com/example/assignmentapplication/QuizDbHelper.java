@@ -51,14 +51,19 @@ public class QuizDbHelper extends SQLiteOpenHelper {
     }
 
     private void fillQuestionsTable() {
-        QuizQuestion q1 = new QuizQuestion(1, "What style of referencing is used at UNSW?", "APA", "Harvard", "MLA", "Chicago", 1, "Referencing");
-        addQuizQuestion(q1);
-        QuizQuestion q2 = new QuizQuestion(2, "A list of references should be displayed A-Z.", "True", "False, they should be displayed by date order", "False, they should be displayed Z-A", "It doesn't matter", 1, "Referencing");
-        addQuizQuestion(q2);
-        QuizQuestion q3 = new QuizQuestion(3, "Which example presents a correct in-text citation?", "(Smith, 1985)", "(Smith 1985)", "(How to reference by John Smith 1985)", "(source 5)", 2, "Referencing");
-        addQuizQuestion(q3);
-        QuizQuestion q4 = new QuizQuestion(4, "Which of the following types of sources do NOT need to be referenced?", "News", "Blogs", "Youtube Video", "None of the above", 4, "Referencing");
-        addQuizQuestion(q4);
+        int i = 1;
+        QuizQuestion q1 = new QuizQuestion(i, "What style of referencing is used at UNSW?", "APA", "Harvard", "MLA", "Chicago", 1, "Referencing");
+        addQuizQuestion(q1); i++;
+        QuizQuestion q2 = new QuizQuestion(i, "A list of references should be displayed A-Z.", "True", "False, they should be displayed by date order", "False, they should be displayed Z-A", "It doesn't matter", 1, "Referencing");
+        addQuizQuestion(q2); i++;
+        QuizQuestion q3 = new QuizQuestion(i, "Which example presents a correct in-text citation?", "(Smith, 1985)", "(Smith 1985)", "(How to reference by John Smith 1985)", "(source 5)", 2, "Referencing");
+        addQuizQuestion(q3); i++;
+        QuizQuestion q4 = new QuizQuestion(i, "Which of the following types of sources do NOT need to be referenced?", "News", "Blogs", "Youtube Video", "None of the above", 4, "Referencing");
+        addQuizQuestion(q4); i++;
+        QuizQuestion q5 = new QuizQuestion(i, "Which of the following would be considered a reliable source for a scientific project?", "Wikipedia", "The Onion", "Journal of Science", "None of the above", 3, "Researching");
+        addQuizQuestion(q5); i++;
+        QuizQuestion q6 = new QuizQuestion(i, "Which of the following can be used to find scholarly articles?", "Google Scholar", "EBSCOHost", "JSTOR", "All of the above", 4, "Researching");
+        addQuizQuestion(q6); i++;
 
     }
 
@@ -76,10 +81,10 @@ public class QuizDbHelper extends SQLiteOpenHelper {
     }
 
 
-    public ArrayList<QuizQuestion> getQuestions(){
+    public ArrayList<QuizQuestion> getQuestions(String category){
         ArrayList<QuizQuestion> questionList = new ArrayList<>();
         db = getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM " + QuestionsTable.TABLE_NAME, null);
+        Cursor c = db.rawQuery("SELECT * FROM " + QuestionsTable.TABLE_NAME + " WHERE " + QuestionsTable.COLUMN_CATEGORY + " = '" + category + "'", null);
 
         if (c.moveToFirst()){
             do{

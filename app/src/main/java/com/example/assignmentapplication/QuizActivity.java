@@ -77,10 +77,13 @@ public class QuizActivity extends AppCompatActivity {
         textColorDefaultRb = rb1.getTextColors();
         textColorDefaultCd = textCountDown.getTextColors();
 
+        Intent i = getIntent();
+        String category = i.getStringExtra("CATEGORY");
+
         if(savedInstanceState==null) {
             //change from sqlite boilerplate to ROOM
             QuizDbHelper dbHelper = new QuizDbHelper(this);
-            questionList = dbHelper.getQuestions();
+            questionList = dbHelper.getQuestions(category);
             questionCountTotal = questionList.size();
             Collections.shuffle(questionList);
 

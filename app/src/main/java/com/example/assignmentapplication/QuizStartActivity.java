@@ -33,7 +33,10 @@ public class QuizStartActivity extends AppCompatActivity {
     }
 
     public void startQuiz(View view){
+        Intent intentA = getIntent();
+        String category = intentA.getStringExtra("CATEGORY");
         Intent intent = new Intent(QuizStartActivity.this, QuizActivity.class);
+        intent.putExtra("CATEGORY", category);
         startActivityForResult(intent, REQUEST_CODE_QUIZ);
     }
 
