@@ -3,6 +3,10 @@ package com.example.assignmentapplication;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.room.Entity;
+
+
+@Entity(tableName = "questions")
 public class QuizQuestion implements Parcelable {
     private String question;
     private String answerA;

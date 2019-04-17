@@ -8,7 +8,8 @@ public final class QuizContract {
     //to ensure no one can make an instance of this clas.
     private QuizContract(){}
 
-    public static class QuestionsTable implements BaseColumns {
+    public static class QuestionsTable {
+        public static final String _ID = "_id";
         public static final String TABLE_NAME = "quiz_questions";
         public static final String COLUMN_QUESTION = "question";
         public static final String COLUMN_ANSWERA = "answerA";
