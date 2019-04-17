@@ -238,7 +238,7 @@ public class QuizActivity extends AppCompatActivity {
     private void finishQuiz(){
         Intent resultIntent = new Intent();
         resultIntent.putExtra(EXTRA_SCORE, score);
-        int grade = (score/questionList.size())*100;
+        double grade = (score/questionList.size())*100;
         String gradeMessage;
         if(grade<50){
             gradeMessage = "Tragic.";
