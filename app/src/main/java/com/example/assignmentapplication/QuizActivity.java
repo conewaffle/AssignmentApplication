@@ -238,6 +238,14 @@ public class QuizActivity extends AppCompatActivity {
     private void finishQuiz(){
         Intent resultIntent = new Intent();
         resultIntent.putExtra(EXTRA_SCORE, score);
+        int grade = (score/questionList.size())*100;
+        String gradeMessage;
+        if(grade<50){
+            gradeMessage = "Tragic.";
+        } else if(grade<80){
+            gradeMessage = "You can do better!";
+        } else gradeMessage = "Well Done!";
+        Toast.makeText(this, "You Scored " + score + "/" + questionList.size() + "! " + gradeMessage, Toast.LENGTH_LONG).show();
         setResult(RESULT_OK, resultIntent);
         finish();
     }
