@@ -29,13 +29,14 @@ public class QuizDbHelper extends SQLiteOpenHelper {
 
         final String SQL_CREATE_QUESTIONS_TABLE = "CREATE TABLE " +
                 QuestionsTable.TABLE_NAME + " ( " +
-                QuestionsTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                QuestionsTable._ID + " INTEGER PRIMARY KEY, " +
                 QuestionsTable.COLUMN_QUESTION + " TEXT, " +
                 QuestionsTable.COLUMN_ANSWERA + " TEXT, " +
                 QuestionsTable.COLUMN_ANSWERB + " TEXT, " +
                 QuestionsTable.COLUMN_ANSWERC + " TEXT, " +
                 QuestionsTable.COLUMN_ANSWERD + " TEXT, " +
-                QuestionsTable.COLUMN_CORRECT_ANSWER + " INTEGER" +
+                QuestionsTable.COLUMN_CORRECT_ANSWER + " INTEGER, " +
+                QuestionsTable.COLUMN_CATEGORY + " TEXT" +
                 ")";
 
         db.execSQL(SQL_CREATE_QUESTIONS_TABLE);
@@ -50,26 +51,27 @@ public class QuizDbHelper extends SQLiteOpenHelper {
     }
 
     private void fillQuestionsTable() {
-        QuizQuestion q1 = new QuizQuestion("What style of referencing is used at UNSW", "APA", "Harvard", "MLA", "Chicago", 1);
+        QuizQuestion q1 = new QuizQuestion(1, "What style of referencing is used at UNSW?", "APA", "Harvard", "MLA", "Chicago", 1, "Referencing");
         addQuizQuestion(q1);
-        QuizQuestion q2 = new QuizQuestion("Example Question hahaha", "A", "B", "C", "D", 2);
+        QuizQuestion q2 = new QuizQuestion(2, "A list of references should be displayed A-Z.", "True", "False, they should be displayed by date order", "False, they should be displayed Z-A", "It doesn't matter", 1, "Referencing");
         addQuizQuestion(q2);
-        QuizQuestion q3 = new QuizQuestion("C is correct", "A", "B", "C", "D", 3);
+        QuizQuestion q3 = new QuizQuestion(3, "Which example presents a correct in-text citation?", "(Smith, 1985)", "(Smith 1985)", "(How to reference by John Smith 1985)", "(source 5)", 2, "Referencing");
         addQuizQuestion(q3);
-        QuizQuestion q4 = new QuizQuestion("D is correct", "A", "B", "C", "D", 4);
+        QuizQuestion q4 = new QuizQuestion(4, "Which of the following types of sources do NOT need to be referenced?", "News", "Blogs", "Youtube Video", "None of the above", 4, "Referencing");
         addQuizQuestion(q4);
-        QuizQuestion q5 = new QuizQuestion("B is correct", "A", "B", "C", "D", 2);
-        addQuizQuestion(q5);
+
     }
 
     private void addQuizQuestion(QuizQuestion question){
         ContentValues cv = new ContentValues();
+        cv.put(QuestionsTable._ID, question.getId());
         cv.put(QuestionsTable.COLUMN_QUESTION, question.getQuestion());
         cv.put(QuestionsTable.COLUMN_ANSWERA, question.getAnswerA());
         cv.put(QuestionsTable.COLUMN_ANSWERB, question.getAnswerB());
         cv.put(QuestionsTable.COLUMN_ANSWERC, question.getAnswerC());
         cv.put(QuestionsTable.COLUMN_ANSWERD, question.getAnswerD());
         cv.put(QuestionsTable.COLUMN_CORRECT_ANSWER, question.getCorrectAnswer());
+        cv.put(QuestionsTable.COLUMN_CATEGORY, question.getCategory());
         db.insert(QuestionsTable.TABLE_NAME, null, cv);
     }
 

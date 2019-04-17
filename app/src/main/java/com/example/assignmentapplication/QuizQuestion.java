@@ -8,43 +8,51 @@ import androidx.room.Entity;
 
 @Entity(tableName = "questions")
 public class QuizQuestion implements Parcelable {
+    private int id;
     private String question;
     private String answerA;
     private String answerB;
     private String answerC;
     private String answerD;
     private int correctAnswer;
+    private String category;
 
     public QuizQuestion(){
 
     }
 
-    public QuizQuestion(String question, String answerA, String answerB, String answerC, String answerD, int correctAnswer){
+    public QuizQuestion(int id, String question, String answerA, String answerB, String answerC, String answerD, int correctAnswer, String category){
+        this.id = id;
         this.question = question;
         this.answerA = answerA;
         this.answerB = answerB;
         this.answerC = answerC;
         this.answerD = answerD;
         this.correctAnswer = correctAnswer;
+        this.category = category;
     }
 
     protected QuizQuestion(Parcel in) {
+        id = in.readInt();
         question = in.readString();
         answerA = in.readString();
         answerB = in.readString();
         answerC = in.readString();
         answerD = in.readString();
         correctAnswer = in.readInt();
+        category = in.readString();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
         dest.writeString(question);
         dest.writeString(answerA);
         dest.writeString(answerB);
         dest.writeString(answerC);
         dest.writeString(answerD);
         dest.writeInt(correctAnswer);
+        dest.writeString(category);
     }
 
     @Override
@@ -107,6 +115,14 @@ public class QuizQuestion implements Parcelable {
     public int getCorrectAnswer() {
         return correctAnswer;
     }
+
+    public int getId() { return id; }
+
+    public void setId(int id) { this.id = id; }
+
+    public String getCategory() { return category; }
+
+    public void setCategory(String category) { this.category = category; }
 
     public void setCorrectAnswer(int correctAnswer) {
         this.correctAnswer = correctAnswer;
