@@ -28,7 +28,10 @@ public class QuizStartActivity extends AppCompatActivity {
         textHighScore = findViewById(R.id.textHighScore);
         loadHighScore();
 
-        Button startQuiz = findViewById(R.id.quizStart);
+        Intent intent = getIntent();
+        TextView quizTitle = findViewById(R.id.quizTitle);
+        quizTitle.setText(intent.getStringExtra("CATEGORY") + " Quiz");
+
 
     }
 
