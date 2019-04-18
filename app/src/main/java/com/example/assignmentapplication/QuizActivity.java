@@ -22,6 +22,7 @@ import java.util.Locale;
 public class QuizActivity extends AppCompatActivity {
 
     public static final String EXTRA_SCORE = "extraScore";
+    public static final String TOTAL_QUESTIONS = "totalQuestions";
     private static final long COUNTDOWN_IN_MILLIS = 20000;
 
     private static final String KEY_SCORE = "keyScore";
@@ -238,17 +239,11 @@ public class QuizActivity extends AppCompatActivity {
 
     }
     private void finishQuiz(){
-        Intent resultIntent = new Intent();
+        Intent resultIntent = new Intent(QuizActivity.this, QuizResultActivity.class);
         resultIntent.putExtra(EXTRA_SCORE, score);
-        double grade = (score/questionList.size())*100;
-        String gradeMessage;
-        if(grade<50){
-            gradeMessage = "Further study is required.";
-        } else if(grade<80){
-            gradeMessage = "You can do better!";
-        } else gradeMessage = "Well Done!";
-        Toast.makeText(this, "You Scored " + score + "/" + questionList.size() + "! " + gradeMessage, Toast.LENGTH_LONG).show();
-        setResult(RESULT_OK, resultIntent);
+        resultIntent.putExtra(TOTAL_QUESTIONS, questionList.size());
+        //setResult(RESULT_OK, resultIntent);
+        resultIntent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
         finish();
     }
 
