@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -26,12 +27,14 @@ public class QuizResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quiz_result);
 
         textScore = findViewById(R.id.textScore);
+        buttonEndQuiz = findViewById(R.id.btnEndQuiz);
+        gradeMessage = findViewById(R.id.textGradeMsg);
 
         Intent i = getIntent();
         score = i.getIntExtra(EXTRA_SCORE,0);
         totalQuestions = i.getIntExtra(TOTAL_QUESTIONS,0);
 
-        textScore.setText(score + "/" + totalQuestions + "!");
+        textScore.setText(score + "/" + totalQuestions);
 
         grade = (score/totalQuestions)*100;
 
@@ -47,7 +50,12 @@ public class QuizResultActivity extends AppCompatActivity {
 
     }
 
-
+    public void endReview(View view){
+        Intent resultIntent = new Intent(QuizResultActivity.this, QuizStartActivity.class);
+        resultIntent.putExtra(EXTRA_SCORE, score);
+        setResult(RESULT_OK, resultIntent);
+        finish();
+    }
 
 
 

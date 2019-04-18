@@ -239,11 +239,12 @@ public class QuizActivity extends AppCompatActivity {
 
     }
     private void finishQuiz(){
-        Intent resultIntent = new Intent(QuizActivity.this, QuizResultActivity.class);
-        resultIntent.putExtra(EXTRA_SCORE, score);
-        resultIntent.putExtra(TOTAL_QUESTIONS, questionList.size());
+        Intent intent = new Intent(QuizActivity.this, QuizResultActivity.class);
+        intent.putExtra(EXTRA_SCORE, score);
+        intent.putExtra(TOTAL_QUESTIONS, questionList.size());
         //setResult(RESULT_OK, resultIntent);
-        resultIntent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+        intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+        startActivity(intent);
         finish();
     }
 
