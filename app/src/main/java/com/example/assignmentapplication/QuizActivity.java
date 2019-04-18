@@ -204,27 +204,27 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void showSolution(){
-        rb1.setTextColor(Color.RED);
-        rb2.setTextColor(Color.RED);
-        rb3.setTextColor(Color.RED);
-        rb4.setTextColor(Color.RED);
+        rb1.setTextColor(getResources().getColor(R.color.colorIncorrect));
+        rb2.setTextColor(getResources().getColor(R.color.colorIncorrect));
+        rb3.setTextColor(getResources().getColor(R.color.colorIncorrect));
+        rb4.setTextColor(getResources().getColor(R.color.colorIncorrect));
 
         switch (currentQuestion.getCorrectAnswer()){
             case 1:
-                rb1.setTextColor(Color.GREEN);
-                textQuestion.setText("Answer A is correct");
+                rb1.setTextColor(getResources().getColor(R.color.colorCorrect));
+                textQuestion.setText("A is correct");
                 break;
             case 2:
-                rb2.setTextColor(Color.GREEN);
-                textQuestion.setText("Answer B is correct");
+                rb2.setTextColor(getResources().getColor(R.color.colorCorrect));
+                textQuestion.setText("B is correct");
                 break;
             case 3:
-                rb3.setTextColor(Color.GREEN);
-                textQuestion.setText("Answer C is correct");
+                rb3.setTextColor(getResources().getColor(R.color.colorCorrect));
+                textQuestion.setText("C is correct");
                 break;
             case 4:
-                rb4.setTextColor(Color.GREEN);
-                textQuestion.setText("Answer D is correct");
+                rb4.setTextColor(getResources().getColor(R.color.colorCorrect));
+                textQuestion.setText("D is correct");
                 break;
         }
 
@@ -241,7 +241,7 @@ public class QuizActivity extends AppCompatActivity {
         double grade = (score/questionList.size())*100;
         String gradeMessage;
         if(grade<50){
-            gradeMessage = "Tragic.";
+            gradeMessage = "Further study is required.";
         } else if(grade<80){
             gradeMessage = "You can do better!";
         } else gradeMessage = "Well Done!";
