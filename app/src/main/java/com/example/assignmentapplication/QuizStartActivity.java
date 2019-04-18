@@ -19,6 +19,7 @@ public class QuizStartActivity extends AppCompatActivity {
 
     private TextView textHighScore;
     private int highscore;
+    private TextView quizTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +30,9 @@ public class QuizStartActivity extends AppCompatActivity {
         loadHighScore();
 
         Intent intent = getIntent();
-        TextView quizTitle = findViewById(R.id.quizTitle);
+        quizTitle = findViewById(R.id.quizTitle);
         quizTitle.setText(intent.getStringExtra("CATEGORY") + " Quiz");
+        setTitle(intent.getStringExtra("CATEGORY") + " Quiz");
 
 
     }

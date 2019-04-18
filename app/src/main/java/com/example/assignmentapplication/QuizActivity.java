@@ -80,6 +80,8 @@ public class QuizActivity extends AppCompatActivity {
         Intent i = getIntent();
         String category = i.getStringExtra("CATEGORY");
 
+        setTitle(i.getStringExtra("CATEGORY") + " Quiz");
+
         if(savedInstanceState==null) {
             //change from sqlite boilerplate to ROOM
             QuizDbHelper dbHelper = new QuizDbHelper(this);
