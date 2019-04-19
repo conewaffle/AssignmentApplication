@@ -19,6 +19,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
+import static com.example.assignmentapplication.MasterQuizActivity.CATEGORY;
+
 public class QuizActivity extends AppCompatActivity {
 
     public static final String EXTRA_SCORE = "extraScore";
@@ -30,6 +32,7 @@ public class QuizActivity extends AppCompatActivity {
     private static final String KEY_MILLIS_LEFT = "keyMillisLeft";
     private static final String KEY_ANSWERED = "keyAnswered";
     private static final String KEY_QUESTION_LIST = "keyQuestionList";
+    private String category;
 
     private TextView textQuestion;
     private TextView textScore;
@@ -79,9 +82,9 @@ public class QuizActivity extends AppCompatActivity {
         textColorDefaultCd = textCountDown.getTextColors();
 
         Intent i = getIntent();
-        String category = i.getStringExtra("CATEGORY");
+        category = i.getStringExtra(CATEGORY);
 
-        setTitle(i.getStringExtra("CATEGORY") + " Quiz");
+        setTitle(i.getStringExtra(CATEGORY) + " Quiz");
 
         if(savedInstanceState==null) {
             //change from sqlite boilerplate to ROOM
@@ -182,7 +185,7 @@ public class QuizActivity extends AppCompatActivity {
 
         textCountDown.setText(timeFormatted);
 
-        if (timeLeftinMillis<10000){
+        if (timeLeftinMillis<5000){
             textCountDown.setTextColor(Color.RED);
         } else {
             textCountDown.setTextColor(textColorDefaultCd);
@@ -242,6 +245,7 @@ public class QuizActivity extends AppCompatActivity {
         Intent intent = new Intent(QuizActivity.this, QuizResultActivity.class);
         intent.putExtra(EXTRA_SCORE, score);
         intent.putExtra(TOTAL_QUESTIONS, questionList.size());
+        intent.putExtra(CATEGORY, category);
         //setResult(RESULT_OK, resultIntent);
         intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
         startActivity(intent);

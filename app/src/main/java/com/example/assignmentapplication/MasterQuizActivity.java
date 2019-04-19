@@ -9,6 +9,7 @@ import android.widget.Button;
 
 public class MasterQuizActivity extends AppCompatActivity {
 
+    public static final String CATEGORY = "CATEGORY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +23,7 @@ public class MasterQuizActivity extends AppCompatActivity {
         Intent intent = new Intent(MasterQuizActivity.this, QuizStartActivity.class);
         Button button = (Button) view;
         String category = (String) button.getText();
-        intent.putExtra("CATEGORY", category);
+        intent.putExtra(CATEGORY, category);
         startActivity(intent);
     }
 }

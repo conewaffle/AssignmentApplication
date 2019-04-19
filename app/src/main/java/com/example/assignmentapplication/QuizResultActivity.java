@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import static com.example.assignmentapplication.MasterQuizActivity.CATEGORY;
 import static com.example.assignmentapplication.QuizActivity.EXTRA_SCORE;
 import static com.example.assignmentapplication.QuizActivity.TOTAL_QUESTIONS;
 
@@ -20,6 +21,7 @@ public class QuizResultActivity extends AppCompatActivity {
     private double grade;
     private int score;
     private int totalQuestions;
+    private String category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class QuizResultActivity extends AppCompatActivity {
         Intent i = getIntent();
         score = i.getIntExtra(EXTRA_SCORE,0);
         totalQuestions = i.getIntExtra(TOTAL_QUESTIONS,0);
+        category = i.getStringExtra(CATEGORY);
 
         textScore.setText(score + "/" + totalQuestions);
 
@@ -57,6 +60,14 @@ public class QuizResultActivity extends AppCompatActivity {
         finish();
     }
 
+    public void shareResult(View view){
+        String shareMsg = "I Scored " + score + "/" + totalQuestions + " in the " + category + " quiz!";
+        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "I just finished a quiz!");
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, shareMsg);
+        startActivity(Intent.createChooser(sharingIntent, "Share Via"));
+    }
 
 
 

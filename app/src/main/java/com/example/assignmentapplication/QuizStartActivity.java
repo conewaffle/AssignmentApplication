@@ -10,12 +10,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import static com.example.assignmentapplication.MasterQuizActivity.CATEGORY;
+
 public class QuizStartActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_QUIZ = 1;
 
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String KEY_HIGHSCORE = "keyHighScore";
+
+    private String category;
 
     private TextView textHighScore;
     private int highscore;
@@ -31,17 +35,17 @@ public class QuizStartActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         quizTitle = findViewById(R.id.quizTitle);
-        quizTitle.setText(intent.getStringExtra("CATEGORY") + " Quiz");
-        setTitle(intent.getStringExtra("CATEGORY") + " Quiz");
+        quizTitle.setText(intent.getStringExtra(CATEGORY) + " Quiz");
+        setTitle(intent.getStringExtra(CATEGORY) + " Quiz");
 
 
     }
 
     public void startQuiz(View view){
         Intent intentA = getIntent();
-        String category = intentA.getStringExtra("CATEGORY");
+        category = intentA.getStringExtra(CATEGORY);
         Intent intent = new Intent(QuizStartActivity.this, QuizActivity.class);
-        intent.putExtra("CATEGORY", category);
+        intent.putExtra(CATEGORY, category);
         startActivityForResult(intent, REQUEST_CODE_QUIZ);
     }
 
