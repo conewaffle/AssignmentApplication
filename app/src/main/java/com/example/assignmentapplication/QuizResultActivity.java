@@ -28,6 +28,8 @@ public class QuizResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_result);
 
+        setTitle("Quiz Results");
+
         textScore = findViewById(R.id.textScore);
         buttonEndQuiz = findViewById(R.id.btnEndQuiz);
         gradeMessage = findViewById(R.id.textGradeMsg);

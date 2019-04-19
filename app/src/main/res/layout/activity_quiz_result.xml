@@ -42,14 +42,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textYouScored"
-        app:layout_constraintVertical_bias="0.07999998" />
+        app:layout_constraintVertical_bias="0.110000014" />
 
     <Button
         android:id="@+id/btnShare"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
         android:onClick="shareResult"
@@ -59,7 +59,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textScore"
-        app:layout_constraintVertical_bias="0.14999998" />
+        app:layout_constraintVertical_bias="0.110000014" />
 
     <Button
         android:id="@+id/btnEndQuiz"
