@@ -15,7 +15,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".QuizResultActivity"></activity>
+        <activity android:name=".TutorialVidActivity"></activity>
+        <activity
+            android:name=".TopicListActivity"
+            android:label="@string/title_activity_topic_list"
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.assignmentapplication.HomeActivity" />
+        </activity>
+        <activity android:name=".QuizResultActivity" />
         <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

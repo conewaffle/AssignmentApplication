@@ -2,6 +2,7 @@ package com.example.assignmentapplication;
 
 import android.provider.BaseColumns;
 
+//contract is like an interface.
 //this class contains constants for our SQLite operations
 public final class QuizContract {
 

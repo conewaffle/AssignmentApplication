@@ -27,11 +27,22 @@ public class HomeActivity extends AppCompatActivity {
                 goToQuizList(v);
             }
         });
+        iconTopics.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                goToTopicList(v);
+            }
+        });
 
     }
 
     public void goToQuizList(View view){
         Intent intent = new Intent(HomeActivity.this, MasterQuizActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToTopicList(View view){
+        Intent intent = new Intent(HomeActivity.this, TopicListActivity.class);
         startActivity(intent);
     }
 }
