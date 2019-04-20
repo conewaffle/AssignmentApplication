@@ -18,6 +18,9 @@ public class QuizStartActivity extends AppCompatActivity {
 
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String KEY_HIGHSCORE = "keyHighScore";
+    public static final String KEY_HIGHSCORERESEARCH = "keyHighScoreResearching";
+    public static final String KEY_HIGHSCOREREF = "keyHighScoreReferencing";
+    public static final String KEY_HIGHSCORETOPICX = "keyHighScoreTopicX";
 
     private String category;
 
@@ -30,20 +33,20 @@ public class QuizStartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_start);
 
+        Intent intentCategory = getIntent();
+        category = intentCategory.getStringExtra(CATEGORY);
+
+        quizTitle = findViewById(R.id.quizTitle);
+        quizTitle.setText(category + " Quiz");
+        setTitle(category + " Quiz");
+
         textHighScore = findViewById(R.id.textHighScore);
         loadHighScore();
-
-        Intent intent = getIntent();
-        quizTitle = findViewById(R.id.quizTitle);
-        quizTitle.setText(intent.getStringExtra(CATEGORY) + " Quiz");
-        setTitle(intent.getStringExtra(CATEGORY) + " Quiz");
 
 
     }
 
     public void startQuiz(View view){
-        Intent intentA = getIntent();
-        category = intentA.getStringExtra(CATEGORY);
         Intent intent = new Intent(QuizStartActivity.this, QuizActivity.class);
         intent.putExtra(CATEGORY, category);
         startActivityForResult(intent, REQUEST_CODE_QUIZ);
@@ -65,7 +68,7 @@ public class QuizStartActivity extends AppCompatActivity {
 
     private void loadHighScore(){
         SharedPreferences prefs = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        highscore = prefs.getInt(KEY_HIGHSCORE, 0);
+        highscore = prefs.getInt(KEY_HIGHSCORE+category, 0);
         textHighScore.setText("Highscore: " + highscore);
     }
 
@@ -75,7 +78,7 @@ public class QuizStartActivity extends AppCompatActivity {
 
         SharedPreferences prefs = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putInt(KEY_HIGHSCORE, highscore);
+        editor.putInt(KEY_HIGHSCORE+category, highscore);
         editor.apply();
     }
 }

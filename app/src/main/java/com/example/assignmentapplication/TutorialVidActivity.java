@@ -13,24 +13,18 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 
-public class TutorialVidActivity extends YouTubeBaseActivity
-        implements YouTubePlayer.OnInitializedListener {
+public class TutorialVidActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
 
     private static final String TAG = "TutorialVidActivity";
     static final String GOOGLE_API_KEY = "AIzaSyBBLP3Q6KTR8Io2-Pox36nGcVL1pr9V7EE";
-    String youtubeVideoId = "TODO";
-    String youtubePlaylist = "TODO";
+    private String youtubeVideoId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_tutorial_vid);
+        setContentView(R.layout.activity_tutorial_vid);
 
-        ConstraintLayout layout = (ConstraintLayout) getLayoutInflater().inflate(R.layout.activity_tutorial_vid, null);
-        setContentView(layout);
-        YouTubePlayerView playerView = new YouTubePlayerView(this);
-        playerView.setLayoutParams(new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        layout.addView(playerView);
+        YouTubePlayerView playerView = (YouTubePlayerView) findViewById(R.id.youtubePlayer);
         playerView.initialize(GOOGLE_API_KEY, this);
 
         youtubeVideoId = "XEOCbFJjRw0";
@@ -39,9 +33,10 @@ public class TutorialVidActivity extends YouTubeBaseActivity
 
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean wasRestored) {
-        youTubePlayer.setPlayerStateChangeListener(playerStateChangeListener);
         Log.d(TAG,"onInitializationSuccess: provider is " + provider.getClass().toString());
         Toast.makeText(this, "Player Loaded", Toast.LENGTH_LONG).show();
+
+        youTubePlayer.setPlayerStateChangeListener(playerStateChangeListener);
 
         if(!wasRestored){
             youTubePlayer.cueVideo(youtubeVideoId);

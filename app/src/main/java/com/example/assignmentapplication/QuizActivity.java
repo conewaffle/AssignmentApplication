@@ -185,7 +185,7 @@ public class QuizActivity extends AppCompatActivity {
 
         textCountDown.setText(timeFormatted);
 
-        if (timeLeftinMillis<5000){
+        if (timeLeftinMillis<6000){
             textCountDown.setTextColor(Color.RED);
         } else {
             textCountDown.setTextColor(textColorDefaultCd);

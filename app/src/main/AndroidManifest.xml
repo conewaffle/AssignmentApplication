@@ -27,8 +27,7 @@
         <activity
             android:name=".TopicListActivity"
             android:label="@string/title_activity_topic_list"
-            android:parentActivityName=".HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:parentActivityName=".HomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeActivity" />

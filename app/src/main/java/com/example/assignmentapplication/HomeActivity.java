@@ -10,6 +10,8 @@ import android.widget.ImageView;
 
 public class HomeActivity extends AppCompatActivity {
 
+    public static final String TOTAL_POINTS = "totalPoints";
+
     private ImageView iconQuiz;
     private ImageView iconTopics;
 
