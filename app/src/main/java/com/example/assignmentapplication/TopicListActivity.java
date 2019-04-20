@@ -1,5 +1,6 @@
 package com.example.assignmentapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
+import android.widget.Button;
 
 public class TopicListActivity extends AppCompatActivity {
 
@@ -16,12 +18,17 @@ public class TopicListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_topic_list);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Tutorials");
 
+        Button btnTest = findViewById(R.id.buttonTester);
 
+    }
 
+    public void goToTutorial(View view){
+        Intent intent = new Intent(TopicListActivity.this, TutorialVidActivity.class);
+        startActivity(intent);
     }
 }
