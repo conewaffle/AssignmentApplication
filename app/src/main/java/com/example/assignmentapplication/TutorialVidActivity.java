@@ -39,8 +39,9 @@ public class TutorialVidActivity extends YouTubeBaseActivity
 
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean wasRestored) {
+        youTubePlayer.setPlayerStateChangeListener(playerStateChangeListener);
         Log.d(TAG,"onInitializationSuccess: provider is " + provider.getClass().toString());
-        Toast.makeText(this, "Initialized Player Successfully", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Player Loaded", Toast.LENGTH_LONG).show();
 
         if(!wasRestored){
             youTubePlayer.cueVideo(youtubeVideoId);
@@ -57,4 +58,36 @@ public class TutorialVidActivity extends YouTubeBaseActivity
             Toast.makeText(this, errorMsg, Toast.LENGTH_LONG).show();
         }
     }
+
+    private YouTubePlayer.PlayerStateChangeListener playerStateChangeListener = new YouTubePlayer.PlayerStateChangeListener() {
+        @Override
+        public void onLoading() {
+
+        }
+
+        @Override
+        public void onLoaded(String s) {
+
+        }
+
+        @Override
+        public void onAdStarted() {
+
+        }
+
+        @Override
+        public void onVideoStarted() {
+
+        }
+
+        @Override
+        public void onVideoEnded() {
+            Toast.makeText(TutorialVidActivity.this, "You have earned 50 stars for finishing this video!", Toast.LENGTH_LONG).show();
+        }
+
+        @Override
+        public void onError(YouTubePlayer.ErrorReason errorReason) {
+
+        }
+    };
 }

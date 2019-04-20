@@ -15,7 +15,7 @@ public class MasterQuizActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_master_quiz);
-        setTitle("All Quizzes");
+        setTitle("All Quiz Topics");
 
     }
 
