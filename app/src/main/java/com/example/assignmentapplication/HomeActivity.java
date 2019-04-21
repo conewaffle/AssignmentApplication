@@ -1,6 +1,7 @@
 package com.example.assignmentapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,22 +14,22 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     public static final String TOTAL_POINTS = "totalPoints";
 
-    private ImageView iconQuiz;
-    private ImageView iconTopics;
-    private ImageView iconSettings;
+    private CardView cardTopics;
+    private CardView cardQuiz;
+    private CardView cardSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        iconQuiz = findViewById(R.id.iconQuiz);
-        iconTopics = findViewById(R.id.iconTopics);
-        iconSettings = findViewById(R.id.iconSettings);
+        cardTopics = findViewById(R.id.cardTopics);
+        cardQuiz = findViewById(R.id.cardQuiz);
+        cardSettings = findViewById(R.id.cardSettings);
 
-        iconQuiz.setOnClickListener(this);
-        iconTopics.setOnClickListener(this);
-        iconSettings.setOnClickListener(this);
+        cardTopics.setOnClickListener(this);
+        cardQuiz.setOnClickListener(this);
+        cardSettings.setOnClickListener(this);
 
     }
 
@@ -36,13 +37,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         Intent intent = null;
         switch (v.getId()) {
-            case R.id.iconQuiz:
+            case R.id.cardQuiz:
                 intent = new Intent(HomeActivity.this, MasterQuizActivity.class);
                 break;
-            case R.id.iconTopics:
+            case R.id.cardTopics:
                 intent = new Intent(HomeActivity.this, TopicListActivity.class);
                 break;
-            case R.id.iconSettings:
+            case R.id.cardSettings:
                 intent = new Intent(HomeActivity.this, SettingsActivity.class);
                 break;
             default:
