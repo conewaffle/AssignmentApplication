@@ -51,8 +51,8 @@ public class TopicListActivity extends AppCompatActivity {
         mAdapter = new TopicAdapter(myDataset1);
         mAdapter2 = new TopicAdapter(new ArrayList<Tutorial>());
 
-        new InsertDBTask().execute();
-        //new QueryDBTask().execute();
+        //new InsertDBTask().execute();
+        new QueryDBTask().execute();
         //mAdapter3 = new TopicAdapter(new ArrayList<Tutorial>());
         recyclerView1.setAdapter(mAdapter);
         recyclerView2.setAdapter(mAdapter2);

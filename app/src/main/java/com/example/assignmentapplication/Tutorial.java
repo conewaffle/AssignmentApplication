@@ -1,18 +1,21 @@
 package com.example.assignmentapplication;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "tutorial")
 public class Tutorial {
 
-    @PrimaryKey
+    @PrimaryKey @NonNull
     private String title;
     private String shortDesc;
     private String category;
     private String vidLink;
     private String tutorialBody;
 
+    @Ignore
     public Tutorial(){
 
     }
