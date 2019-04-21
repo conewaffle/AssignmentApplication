@@ -51,7 +51,7 @@ public class TopicListActivity extends AppCompatActivity {
         mAdapter = new TopicAdapter(myDataset1);
         mAdapter2 = new TopicAdapter(new ArrayList<Tutorial>());
 
-        //new InsertDBTask().execute();
+        new InsertDBTask().execute();
         new QueryDBTask().execute();
         //mAdapter3 = new TopicAdapter(new ArrayList<Tutorial>());
         recyclerView1.setAdapter(mAdapter);
@@ -81,6 +81,8 @@ public class TopicListActivity extends AppCompatActivity {
         }
     }
 
+
+    //write questions here. the task only executes the inserts if the database does not contain any tutorials.
     private class InsertDBTask extends AsyncTask<Void, Void, Void>{
 
         @Override
@@ -88,7 +90,9 @@ public class TopicListActivity extends AppCompatActivity {
             TutorialDatabase db = Room
                     .databaseBuilder(TopicListActivity.this, TutorialDatabase.class, "tutorial-database")
                     .build();
-                db.tutorialDao().insert(new Tutorial("Introduction to Researching", "This tutorial will introduce you to Researching", "Researching", "XEOCbFJjRw0", "Researching is important for assignments."));
+                if(db.tutorialDao().getTutorials().get(0)==null) {
+                    db.tutorialDao().insert(new Tutorial("Introduction to Researching", "This tutorial will introduce you to Researching", "Researching", "XEOCbFJjRw0", "Researching is important for assignments."));
+                }
                 return null;
         }
 
