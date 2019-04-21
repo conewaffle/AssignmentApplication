@@ -1,7 +1,12 @@
 package com.example.assignmentapplication;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "tutorial")
 public class Tutorial {
 
+    @PrimaryKey
     private String title;
     private String shortDesc;
     private String category;
