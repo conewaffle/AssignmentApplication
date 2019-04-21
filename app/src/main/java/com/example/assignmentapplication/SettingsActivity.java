@@ -41,6 +41,9 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+
+        //reset points
+
     }
 
 

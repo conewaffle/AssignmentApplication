@@ -22,6 +22,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        setTitle("UNSW1001");
 
         cardTopics = findViewById(R.id.cardTopics);
         cardQuiz = findViewById(R.id.cardQuiz);
