@@ -1,10 +1,14 @@
 package com.example.assignmentapplication;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import static com.example.assignmentapplication.QuizStartActivity.KEY_HIGHSCORE;
 import static com.example.assignmentapplication.QuizStartActivity.KEY_HIGHSCOREREF;
@@ -18,6 +22,23 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         setTitle("Settings");
+
+        Button btnReset = findViewById(R.id.btnResetScores);
+        btnReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                new AlertDialog.Builder(SettingsActivity.this)
+                        .setTitle("Confirm Reset")
+                        .setMessage("Are you sure you want to reset the high scores for all quizzes?")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                resetScores(v);
+                                Toast.makeText(SettingsActivity.this, "High Scores for all quizzes have now been reset. Your points are unaffected.", Toast.LENGTH_LONG).show();
+                            }})
+                        .setNegativeButton(android.R.string.no, null).show();
+            }
+        });
 
     }
 

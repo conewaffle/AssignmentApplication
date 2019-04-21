@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,6 +15,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private ImageView iconQuiz;
     private ImageView iconTopics;
+    private ImageView iconSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +24,7 @@ public class HomeActivity extends AppCompatActivity {
 
         iconQuiz = findViewById(R.id.iconQuiz);
         iconTopics = findViewById(R.id.iconTopics);
+        iconSettings = findViewById(R.id.iconSettings);
 
         iconQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,6 +38,13 @@ public class HomeActivity extends AppCompatActivity {
                 goToTopicList(v);
             }
         });
+        iconSettings.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                goToSettings(v);
+            }
+        });
+
 
     }
 
@@ -45,6 +55,11 @@ public class HomeActivity extends AppCompatActivity {
 
     public void goToTopicList(View view){
         Intent intent = new Intent(HomeActivity.this, TopicListActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToSettings(View view){
+        Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
         startActivity(intent);
     }
 }
