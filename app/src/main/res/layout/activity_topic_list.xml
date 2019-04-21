@@ -42,7 +42,7 @@
                             android:id="@+id/cardView1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            app:cardBackgroundColor="@android:color/background_light"
+                            app:cardBackgroundColor="@color/colorPrimary"
                             app:cardElevation="2dp">
 
                             <TextView
@@ -50,15 +50,18 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
+                                android:fontFamily="sans-serif-thin"
                                 android:text="Topic 1"
-                                android:textSize="18sp" />
+                                android:textColor="@android:color/white"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
 
                         </androidx.cardview.widget.CardView>
 
                         <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycler1"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp" />
+                            android:layout_height="wrap_content" />
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
@@ -70,6 +73,7 @@
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
+                    app:cardBackgroundColor="@android:color/background_light"
                     app:cardElevation="2dp">
 
                     <LinearLayout
@@ -81,6 +85,7 @@
                             android:id="@+id/cardView2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            app:cardBackgroundColor="@color/colorPrimary"
                             app:cardElevation="2dp">
 
                             <TextView
@@ -88,14 +93,18 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
+                                android:fontFamily="sans-serif-thin"
                                 android:text="Topic 2"
-                                android:textSize="18sp" />
+                                android:textColor="@android:color/white"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
                         </androidx.cardview.widget.CardView>
 
                         <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycler2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp" />
+                            android:background="@android:color/background_light" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -106,6 +115,7 @@
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="16dp"
+                    app:cardBackgroundColor="@android:color/background_light"
                     app:cardElevation="2dp">
 
                     <LinearLayout
@@ -116,6 +126,7 @@
                         <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            app:cardBackgroundColor="@color/colorPrimary"
                             app:cardElevation="2dp">
 
                             <TextView
@@ -123,14 +134,17 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
+                                android:fontFamily="sans-serif-thin"
                                 android:text="Topic 3"
-                                android:textSize="18sp" />
+                                android:textColor="@android:color/white"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
                         </androidx.cardview.widget.CardView>
 
                         <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycler3"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp" />
+                            android:layout_height="wrap_content" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
