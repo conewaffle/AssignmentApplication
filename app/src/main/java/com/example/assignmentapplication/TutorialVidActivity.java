@@ -19,6 +19,8 @@ public class TutorialVidActivity extends YouTubeBaseActivity implements YouTubeP
     static final String GOOGLE_API_KEY = "AIzaSyBBLP3Q6KTR8Io2-Pox36nGcVL1pr9V7EE";
     private String youtubeVideoId;
 
+    private long backPressedTime;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,4 +87,15 @@ public class TutorialVidActivity extends YouTubeBaseActivity implements YouTubeP
 
         }
     };
+
+    @Override
+    public void onBackPressed(){
+        if(backPressedTime+2000>System.currentTimeMillis()){
+            finish();
+        } else {
+            Toast.makeText(this, "Press back again to exit tutorial without finishing", Toast.LENGTH_SHORT).show();
+        }
+        backPressedTime = System.currentTimeMillis();
+    }
+
 }

@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
 
     public static final String TOTAL_POINTS = "totalPoints";
 
@@ -26,40 +26,30 @@ public class HomeActivity extends AppCompatActivity {
         iconTopics = findViewById(R.id.iconTopics);
         iconSettings = findViewById(R.id.iconSettings);
 
-        iconQuiz.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                goToQuizList(v);
-            }
-        });
-        iconTopics.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                goToTopicList(v);
-            }
-        });
-        iconSettings.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                goToSettings(v);
-            }
-        });
-
+        iconQuiz.setOnClickListener(this);
+        iconTopics.setOnClickListener(this);
+        iconSettings.setOnClickListener(this);
 
     }
 
-    public void goToQuizList(View view){
-        Intent intent = new Intent(HomeActivity.this, MasterQuizActivity.class);
-        startActivity(intent);
+    @Override
+    public void onClick(View v) {
+        Intent intent = null;
+        switch (v.getId()) {
+            case R.id.iconQuiz:
+                intent = new Intent(HomeActivity.this, MasterQuizActivity.class);
+                break;
+            case R.id.iconTopics:
+                intent = new Intent(HomeActivity.this, TopicListActivity.class);
+                break;
+            case R.id.iconSettings:
+                intent = new Intent(HomeActivity.this, SettingsActivity.class);
+                break;
+            default:
+        }
+        if (intent != null) {
+            startActivity(intent);
+        }
     }
 
-    public void goToTopicList(View view){
-        Intent intent = new Intent(HomeActivity.this, TopicListActivity.class);
-        startActivity(intent);
-    }
-
-    public void goToSettings(View view){
-        Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
-        startActivity(intent);
-    }
 }

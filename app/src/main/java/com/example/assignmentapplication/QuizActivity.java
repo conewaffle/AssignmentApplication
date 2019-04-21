@@ -96,9 +96,6 @@ public class QuizActivity extends AppCompatActivity {
             showNextQuestion();
         } else {
             questionList = savedInstanceState.getParcelableArrayList(KEY_QUESTION_LIST);
-            //if (questionList==null){
-            //    finish();
-            //}
             questionCountTotal = questionList.size();
             questionCounter = savedInstanceState.getInt(KEY_QUESTION_COUNT);
             currentQuestion = questionList.get(questionCounter - 1);
@@ -246,7 +243,6 @@ public class QuizActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_SCORE, score);
         intent.putExtra(TOTAL_QUESTIONS, questionList.size());
         intent.putExtra(CATEGORY, category);
-        //setResult(RESULT_OK, resultIntent);
         intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
         startActivity(intent);
         finish();
@@ -260,7 +256,6 @@ public class QuizActivity extends AppCompatActivity {
             Toast.makeText(this, "Press back again to finish", Toast.LENGTH_SHORT).show();
         }
         backPressedTime = System.currentTimeMillis();
-
     }
 
     @Override

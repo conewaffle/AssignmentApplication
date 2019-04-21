@@ -23,6 +23,7 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         setTitle("Settings");
 
+        //linking button click to high score reset function, including a confirmation dialog.
         Button btnReset = findViewById(R.id.btnResetScores);
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,7 +44,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
 
-    //change for  all categories
+    //method for resetting quiz high scores. change for all categories if adding new categories
     private void resetScores(View view){
         SharedPreferences prefs = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
