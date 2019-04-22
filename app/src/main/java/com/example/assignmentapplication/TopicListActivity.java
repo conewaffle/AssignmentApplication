@@ -1,5 +1,6 @@
 package com.example.assignmentapplication;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -49,26 +50,24 @@ public class TopicListActivity extends AppCompatActivity {
         recyclerView3.setHasFixedSize(true);
         recyclerView3.setLayoutManager(new LinearLayoutManager(this));
 
-        ArrayList<Tutorial> myDataset1 = new ArrayList<>();
-        myDataset1.add(new Tutorial("Introduction to Harvard Referencing", "This tutorial will introduce you to Harvard Referencing", "Referencing", "XEOCbFJjRw0", "Harvard referencing is used at UNSW."));
-
-        mAdapter = new TopicAdapter(myDataset1);
+        mAdapter = new TopicAdapter(new ArrayList<Tutorial>());
         mAdapter2 = new TopicAdapter(new ArrayList<Tutorial>());
-
-        SharedPreferences checkDbPrefs =  getSharedPreferences(DATABASE_INITIALISED, MODE_PRIVATE);
-        //since we don't assign the value (1) for DATABASE_INITIALISED until insertDbTask we check for inequality to 1 rather than equality to 0
-        if (checkDbPrefs.getInt(DATABASE_INITIALISED, 0)!=1) {
-            new InsertDBTask().execute();
-        }
-        //ensures that we only execute the QueryDBTask if the database has been populated
-        if (checkDbPrefs.getInt(DATABASE_INITIALISED,0)==1){
-            new QueryDBTask().execute();
-        }
 
         //mAdapter3 = new TopicAdapter(new ArrayList<Tutorial>());
         recyclerView1.setAdapter(mAdapter);
         recyclerView2.setAdapter(mAdapter2);
         //recyclerView3.setAdapter(mAdapter3);
+
+        SharedPreferences checkDbPrefs =  getSharedPreferences(DATABASE_INITIALISED, MODE_PRIVATE);
+
+        //since we don't assign the value (1) for DATABASE_INITIALISED until insertDbTask we check for inequality to 1 rather than equality to 0
+        if (checkDbPrefs.getInt(DATABASE_INITIALISED, 0)!=1) {
+            new InsertDBTask().execute();
+        } else {
+            new QueryDBTask().execute();
+        }
+
+
     }
 
     public void goToTutorial(View view){
@@ -76,25 +75,35 @@ public class TopicListActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private class QueryDBTask extends AsyncTask<Void, Void, ArrayList<Tutorial>> {
+    private class QueryDBTask extends AsyncTask<Void, Void, ArrayList<ArrayList<Tutorial>>> {
 
         @Override
-        protected ArrayList<Tutorial> doInBackground(Void... voids){
+        protected ArrayList<ArrayList<Tutorial>> doInBackground(Void... voids){
             TutorialDatabase db = Room
                     .databaseBuilder(TopicListActivity.this, TutorialDatabase.class, "tutorial-database")
                     .build();
-                return (ArrayList<Tutorial>) db.tutorialDao().getTutorials();
+                //casting the List into ArrayList, since the DAO was not working with ArrayLists
+                ArrayList<Tutorial> set1 = (ArrayList<Tutorial>) db.tutorialDao().getResearchingTutorials();
+                ArrayList<Tutorial> set2 = (ArrayList<Tutorial>) db.tutorialDao().getReferencingTutorials();
+                ArrayList<ArrayList<Tutorial>> masterList = new ArrayList<>();
+                masterList.add(set1);
+                masterList.add(set2);
+                return masterList;
         }
 
         @Override
-        protected void onPostExecute(ArrayList<Tutorial> tutorials){
-            mAdapter2.setTutorials(tutorials);
+        protected void onPostExecute(ArrayList<ArrayList<Tutorial>> tutorials){
+            mAdapter.setTutorials(tutorials.get(0));
+            mAdapter.notifyDataSetChanged();
+            mAdapter2.setTutorials(tutorials.get(1));
             mAdapter2.notifyDataSetChanged();
+
         }
     }
 
 
     //write questions here. the task only executes the inserts if the database does not contain any tutorials.
+    //onPostExecute then executes QueryDBTask
     private class InsertDBTask extends AsyncTask<Void, Void, Void>{
 
         @Override
@@ -102,8 +111,8 @@ public class TopicListActivity extends AppCompatActivity {
             TutorialDatabase db = Room
                     .databaseBuilder(TopicListActivity.this, TutorialDatabase.class, "tutorial-database")
                     .build();
-
                 db.tutorialDao().insert(new Tutorial("Introduction to Researching", "This tutorial will introduce you to Researching", "Researching", "XEOCbFJjRw0", "Researching is important for assignments."));
+                db.tutorialDao().insert(new Tutorial("Introduction to Harvard Referencing", "This tutorial will introduce you to Harvard Referencing", "Referencing", "XEOCbFJjRw0", "Harvard referencing is used at UNSW."));
                 return null;
         }
 
@@ -113,6 +122,7 @@ public class TopicListActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = prefs.edit();
             editor.putInt(DATABASE_INITIALISED, 1);
             editor.apply();
+            new QueryDBTask().execute();
         }
     }
 }

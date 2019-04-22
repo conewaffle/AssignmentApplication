@@ -51,7 +51,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
                                 android:fontFamily="sans-serif-thin"
-                                android:text="Topic 1"
+                                android:text="Assignment Writing"
                                 android:textColor="@android:color/white"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
@@ -94,7 +94,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
                                 android:fontFamily="sans-serif-thin"
-                                android:text="Topic 2"
+                                android:text="Researching"
                                 android:textColor="@android:color/white"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
@@ -135,7 +135,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
                                 android:fontFamily="sans-serif-thin"
-                                android:text="Topic 3"
+                                android:text="Referencing"
                                 android:textColor="@android:color/white"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
