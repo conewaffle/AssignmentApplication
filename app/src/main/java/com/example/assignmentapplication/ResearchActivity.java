@@ -36,7 +36,7 @@ public class ResearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_research);
-        setTitle("Search for Academic Articles");
+        setTitle("Download Academic Articles");
 
         progDialog = new ProgressDialog(ResearchActivity.this);
 
@@ -61,24 +61,24 @@ public class ResearchActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
 
-    private class GetResourcesTask extends AsyncTask<String, Void, ArrayList<Datum>>{
+    private class GetResourcesTask extends AsyncTask<String, Void, AcademicResponse>{
 
         @Override
         protected void onPreExecute(){
             super.onPreExecute();
-            progDialog.setMessage("Loading Academic Articles...");
+            progDialog.setMessage("Loading Academic Articles... This may take several seconds...");
             progDialog.setIndeterminate(false);
             progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             progDialog.setCancelable(true);
             progDialog.show();
         }
 
+        //sends a list of articles relevant to the search query to RecyclerView
+        //returns Response rather than list of Datum to handle case where there are no search results (and no Datum)
         @Override
-        protected ArrayList<Datum> doInBackground(String... query) {
+        protected AcademicResponse doInBackground(String... query) {
 
             try{
                 Retrofit retrofit = new Retrofit.Builder()
@@ -90,9 +90,10 @@ public class ResearchActivity extends AppCompatActivity {
 
                 Call<AcademicResponse> academicCall = client.getResponse(query[0]);
                 Response<AcademicResponse> academicResponse = academicCall.execute();
-                ArrayList<Datum> myList = (ArrayList<Datum>) academicResponse.body().getData();
 
-                return myList;
+                AcademicResponse aResponse = academicResponse.body();
+
+                return aResponse;
 
             } catch(IOException e){
                 e.printStackTrace();
@@ -101,9 +102,15 @@ public class ResearchActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(ArrayList<Datum> result){
-            mAdapter = new ResearchAdapter(result);
-            recyclerView.setAdapter(mAdapter);
+        protected void onPostExecute(AcademicResponse result){
+            if (result.getTotalHits()==0){
+                Toast.makeText(ResearchActivity.this, "No Search Results Found!", Toast.LENGTH_LONG).show();
+            } else {
+                ArrayList<Datum> myList = (ArrayList<Datum>) result.getData();
+                mAdapter = new ResearchAdapter(myList);
+                recyclerView.setAdapter(mAdapter);
+            }
+
             progDialog.dismiss();
         }
     }

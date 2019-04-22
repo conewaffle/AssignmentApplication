@@ -12,6 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         app:cardElevation="5dp">
 
         <LinearLayout
@@ -50,6 +52,7 @@
                     android:ellipsize="end"
                     android:singleLine="true"
                     android:text="Author"
+                    android:textAlignment="textEnd"
                     android:textColor="@android:color/black"
                     android:textSize="12sp"
                     android:textStyle="italic"
@@ -89,6 +92,7 @@
                     android:ellipsize="end"
                     android:singleLine="true"
                     android:text="Publisher"
+                    android:textAlignment="textEnd"
                     android:textColor="@android:color/black"
                     android:textSize="12sp"
                     android:textStyle="italic"

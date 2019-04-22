@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="5"
             android:ems="10"
-            android:hint="Type in a query here"
+            android:hint="e.g. Harvard Referencing"
             android:inputType="textPersonName" />
 
         <Button

@@ -37,7 +37,7 @@ public class ResearchAdapter extends RecyclerView.Adapter<ResearchAdapter.Resear
             researchCard.setOnClickListener(this);
         }
 
-        //finish getting link.
+        //clicking on the research item will download it as a PDF through a browser link
         @Override
         public void onClick(View view){
             int position = getAdapterPosition();
@@ -63,18 +63,26 @@ public class ResearchAdapter extends RecyclerView.Adapter<ResearchAdapter.Resear
 
     @Override
     public void onBindViewHolder(ResearchViewHolder holder, int position){
-        if(mDataset.get(position).getYear().equals(null)){
+        if(mDataset.get(position).getYear()==null){
             holder.titleYear.setText(mDataset.get(position).getTitle() + " (no date)");
         } else {
             holder.titleYear.setText(mDataset.get(position).getTitle() + " (" + Integer.toString(mDataset.get(position).getYear()) + ")");
         }
         if(mDataset.get(position).getAuthors().isEmpty()) {
             holder.author.setText("No Authors");
-        } else holder.author.setText(mDataset.get(position).getAuthors().get(0));
-        holder.pub.setText(mDataset.get(position).getPublisher());
+        } else {
+            holder.author.setText(mDataset.get(position).getAuthors().get(0));
+        }
+        if(mDataset.get(position).getPublisher()==null){
+            holder.pub.setText("No Publisher");
+        } else {
+            holder.pub.setText(mDataset.get(position).getPublisher());
+        }
         if(mDataset.get(position).getSubjects().isEmpty()) {
             holder.itemType.setText("Data not available");
-        } else holder.itemType.setText(mDataset.get(position).getSubjects().get(0)) ;
+        } else {
+            holder.itemType.setText(mDataset.get(position).getSubjects().get(0)) ;
+        }
     }
 
     @Override
