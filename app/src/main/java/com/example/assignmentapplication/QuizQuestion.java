@@ -3,12 +3,16 @@ package com.example.assignmentapplication;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 
 @Entity(tableName = "questions")
 public class QuizQuestion implements Parcelable {
+    @PrimaryKey
+    @NonNull
     private int id;
     private String question;
     private String answerA;

@@ -17,7 +17,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.MyViewHolder
 
     public TopicAdapter(ArrayList<Tutorial> myDataset){mDataset=myDataset;}
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView textTute;
         public CheckBox checkBox;
@@ -26,6 +26,14 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.MyViewHolder
             super(itemView);
             textTute = itemView.findViewById(R.id.textTutorial);
             checkBox = itemView.findViewById(R.id.checkTut);
+
+            textTute.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+
         }
     }
 

@@ -66,12 +66,14 @@ public class QuizStartActivity extends AppCompatActivity {
         }
     }
 
+    //loads high score for the current category/topic
     private void loadHighScore(){
         SharedPreferences prefs = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         highscore = prefs.getInt(KEY_HIGHSCORE+category, 0);
         textHighScore.setText("Highscore: " + highscore);
     }
 
+    //updates the high score for the current category/topic
     private void updateHighScore(int highscoreNew){
         highscore = highscoreNew;
         textHighScore.setText("Highscore: " + highscore);

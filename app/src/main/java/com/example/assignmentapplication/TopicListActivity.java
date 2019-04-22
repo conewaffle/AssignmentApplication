@@ -1,6 +1,7 @@
 package com.example.assignmentapplication;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Query;
 import androidx.room.Room;
 
 import android.view.View;
@@ -20,6 +22,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class TopicListActivity extends AppCompatActivity {
+
+    public static final String DATABASE_INITIALISED = "databaseInitialised";
 
     private RecyclerView recyclerView1;
     private RecyclerView recyclerView2;
@@ -51,8 +55,16 @@ public class TopicListActivity extends AppCompatActivity {
         mAdapter = new TopicAdapter(myDataset1);
         mAdapter2 = new TopicAdapter(new ArrayList<Tutorial>());
 
-        new InsertDBTask().execute();
-        new QueryDBTask().execute();
+        SharedPreferences checkDbPrefs =  getSharedPreferences(DATABASE_INITIALISED, MODE_PRIVATE);
+        //since we don't assign the value (1) for DATABASE_INITIALISED until insertDbTask we check for inequality to 1 rather than equality to 0
+        if (checkDbPrefs.getInt(DATABASE_INITIALISED, 0)!=1) {
+            new InsertDBTask().execute();
+        }
+        //ensures that we only execute the QueryDBTask if the database has been populated
+        if (checkDbPrefs.getInt(DATABASE_INITIALISED,0)==1){
+            new QueryDBTask().execute();
+        }
+
         //mAdapter3 = new TopicAdapter(new ArrayList<Tutorial>());
         recyclerView1.setAdapter(mAdapter);
         recyclerView2.setAdapter(mAdapter2);
@@ -90,11 +102,17 @@ public class TopicListActivity extends AppCompatActivity {
             TutorialDatabase db = Room
                     .databaseBuilder(TopicListActivity.this, TutorialDatabase.class, "tutorial-database")
                     .build();
-                if(db.tutorialDao().getTutorials().get(0)==null) {
-                    db.tutorialDao().insert(new Tutorial("Introduction to Researching", "This tutorial will introduce you to Researching", "Researching", "XEOCbFJjRw0", "Researching is important for assignments."));
-                }
+
+                db.tutorialDao().insert(new Tutorial("Introduction to Researching", "This tutorial will introduce you to Researching", "Researching", "XEOCbFJjRw0", "Researching is important for assignments."));
                 return null;
         }
 
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            SharedPreferences prefs = getSharedPreferences(DATABASE_INITIALISED, MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putInt(DATABASE_INITIALISED, 1);
+            editor.apply();
+        }
     }
 }
