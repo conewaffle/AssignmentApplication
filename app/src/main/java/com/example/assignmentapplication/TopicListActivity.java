@@ -1,6 +1,7 @@
 package com.example.assignmentapplication;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -26,6 +27,7 @@ public class TopicListActivity extends AppCompatActivity {
 
     public static final String DATABASE_INITIALISED = "databaseInitialised";
 
+    private ProgressDialog progDialog;
     private RecyclerView recyclerView1;
     private RecyclerView recyclerView2;
     private RecyclerView recyclerView3;
@@ -39,6 +41,8 @@ public class TopicListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_topic_list);
         setTitle("Tutorials");
 
+        progDialog = new ProgressDialog(TopicListActivity.this);
+
         recyclerView1 = findViewById(R.id.recycler1);
         recyclerView1.setHasFixedSize(true);
         recyclerView1.setLayoutManager(new LinearLayoutManager(this));
@@ -51,11 +55,11 @@ public class TopicListActivity extends AppCompatActivity {
 
         mAdapter = new TopicAdapter(new ArrayList<Tutorial>());
         mAdapter2 = new TopicAdapter(new ArrayList<Tutorial>());
-        //mAdapter3 = new TopicAdapter(new ArrayList<Tutorial>());
+        mAdapter3 = new TopicAdapter(new ArrayList<Tutorial>());
 
         recyclerView1.setAdapter(mAdapter);
         recyclerView2.setAdapter(mAdapter2);
-        //recyclerView3.setAdapter(mAdapter3);
+        recyclerView3.setAdapter(mAdapter3);
 
         //this value will determine whether the app will insert tutorials into database, or proceed directly to querying them
         SharedPreferences checkDbPrefs =  getSharedPreferences(DATABASE_INITIALISED, MODE_PRIVATE);
@@ -67,11 +71,20 @@ public class TopicListActivity extends AppCompatActivity {
             new QueryDBTask().execute();
         }
 
-
     }
 
     //result parameter is an ArrayList containing an ArrayList of tutorials for each category/topic of learning
     private class QueryDBTask extends AsyncTask<Void, Void, ArrayList<ArrayList<Tutorial>>> {
+
+        @Override
+        protected void onPreExecute(){
+            super.onPreExecute();
+            progDialog.setMessage("Loading Topics...");
+            progDialog.setIndeterminate(false);
+            progDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            progDialog.setCancelable(true);
+            progDialog.show();
+        }
 
         @Override
         protected ArrayList<ArrayList<Tutorial>> doInBackground(Void... voids){
@@ -80,11 +93,13 @@ public class TopicListActivity extends AppCompatActivity {
                     .build();
 
                 //casting the List into ArrayList, since the DAO was not working with ArrayLists
-                ArrayList<Tutorial> set1 = (ArrayList<Tutorial>) db.tutorialDao().getResearchingTutorials();
-                ArrayList<Tutorial> set2 = (ArrayList<Tutorial>) db.tutorialDao().getReferencingTutorials();
+                ArrayList<Tutorial> set1 = (ArrayList<Tutorial>) db.tutorialDao().getWritingTutorials();
+                ArrayList<Tutorial> set2 = (ArrayList<Tutorial>) db.tutorialDao().getResearchingTutorials();
+                ArrayList<Tutorial> set3 = (ArrayList<Tutorial>) db.tutorialDao().getReferencingTutorials();
                 ArrayList<ArrayList<Tutorial>> masterList = new ArrayList<>();
                 masterList.add(set1);
                 masterList.add(set2);
+                masterList.add(set3);
                 return masterList;
         }
 
@@ -94,7 +109,9 @@ public class TopicListActivity extends AppCompatActivity {
             mAdapter.notifyDataSetChanged();
             mAdapter2.setTutorials(tutorials.get(1));
             mAdapter2.notifyDataSetChanged();
-
+            mAdapter3.setTutorials(tutorials.get(2));
+            mAdapter3.notifyDataSetChanged();
+            progDialog.dismiss();
         }
     }
 
@@ -110,6 +127,7 @@ public class TopicListActivity extends AppCompatActivity {
                     .build();
                 db.tutorialDao().insert(new Tutorial("Introduction to Researching", "This tutorial will introduce you to Researching", "Researching", "XEOCbFJjRw0", "Researching is important for assignments."));
                 db.tutorialDao().insert(new Tutorial("Introduction to Harvard Referencing", "This tutorial will introduce you to Harvard Referencing", "Referencing", "XEOCbFJjRw0", "Harvard referencing is used at UNSW."));
+                db.tutorialDao().insert(new Tutorial("How to Approach the Assignment Question", "This tutorial will discuss how you can approach assignment questions.", "Writing", "XE0CbFJjRw0", "Assignment writing is fun!"));
                 return null;
         }
 

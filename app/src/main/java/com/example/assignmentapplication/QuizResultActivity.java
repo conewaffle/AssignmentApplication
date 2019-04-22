@@ -3,6 +3,7 @@ package com.example.assignmentapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -41,13 +42,14 @@ public class QuizResultActivity extends AppCompatActivity {
 
         textScore.setText(score + "/" + totalQuestions);
 
-        grade = (score/totalQuestions)*100;
+        grade = ((double)score/(double)totalQuestions)*100;
 
         if(grade<50){
           gradeMessage.setText("Further study is required.");
           textScore.setTextColor(getResources().getColor(R.color.colorIncorrect));
-        } else if(grade<80){
+        } else if(grade<75){
             gradeMessage.setText("You can do better!");
+            textScore.setTextColor(Color.BLACK);
         } else {
             gradeMessage.setText("Well Done!");
             textScore.setTextColor(getResources().getColor(R.color.colorCorrect));

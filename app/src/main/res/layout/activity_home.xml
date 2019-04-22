@@ -166,7 +166,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/card4"
+                    android:id="@+id/cardResearch"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="16dp"
@@ -196,12 +196,12 @@
                             app:srcCompat="@drawable/marks_progress" />
 
                         <TextView
-                            android:id="@+id/textView5"
+                            android:id="@+id/textSearch"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="bottom|center"
-                            android:text="Other"
+                            android:text="Find Sources"
                             android:textAlignment="center"
                             android:textAllCaps="false"
                             android:textColor="@android:color/black"

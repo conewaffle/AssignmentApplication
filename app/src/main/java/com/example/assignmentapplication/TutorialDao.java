@@ -19,6 +19,9 @@ public interface TutorialDao {
     @Query("SELECT * FROM tutorial WHERE category = 'Referencing'")
     List<Tutorial> getReferencingTutorials();
 
+    @Query("SELECT * FROM tutorial WHERE category = 'Writing'")
+    List<Tutorial> getWritingTutorials();
+
     @Insert
     void insert(Tutorial tutorial);
 }
