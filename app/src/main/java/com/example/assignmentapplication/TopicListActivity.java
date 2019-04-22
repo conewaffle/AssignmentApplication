@@ -51,12 +51,13 @@ public class TopicListActivity extends AppCompatActivity {
 
         mAdapter = new TopicAdapter(new ArrayList<Tutorial>());
         mAdapter2 = new TopicAdapter(new ArrayList<Tutorial>());
-
         //mAdapter3 = new TopicAdapter(new ArrayList<Tutorial>());
+
         recyclerView1.setAdapter(mAdapter);
         recyclerView2.setAdapter(mAdapter2);
         //recyclerView3.setAdapter(mAdapter3);
 
+        //this value will determine whether the app will insert tutorials into database, or proceed directly to querying them
         SharedPreferences checkDbPrefs =  getSharedPreferences(DATABASE_INITIALISED, MODE_PRIVATE);
 
         //since we don't assign the value (1) for DATABASE_INITIALISED until insertDbTask we check for inequality to 1 rather than equality to 0

@@ -1,3 +1,6 @@
+//A lot of the code here and throughout the Quiz classes was learnt and sourced from https://codinginflow.com/tutorials/android/quiz-app-with-sqlite/part-1-layouts
+//the code has been adapted, modified and extended where appropriate to suit our application's needs.
+
 package com.example.assignmentapplication;
 
 import androidx.appcompat.app.AppCompatActivity;

@@ -30,7 +30,9 @@
                 android:id="@+id/textTutorialBody"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:text="Testomg Testomg" />
+                android:layout_margin="8dp"
+                android:text="Testomg Testomg"
+                android:textColor="@android:color/black" />
 
 
         </LinearLayout>

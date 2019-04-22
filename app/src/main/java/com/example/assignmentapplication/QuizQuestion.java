@@ -9,7 +9,7 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 
-@Entity(tableName = "questions")
+@Entity(tableName = "quizquestion")
 public class QuizQuestion implements Parcelable {
     @PrimaryKey
     @NonNull
