@@ -13,10 +13,11 @@
         android:foreground="?android:attr/selectableItemBackground">
 
         <LinearLayout
+            android:id="@+id/topicLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/textTutorial"

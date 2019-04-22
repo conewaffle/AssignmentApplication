@@ -1,12 +1,15 @@
 package com.example.assignmentapplication;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "tutorial")
-public class Tutorial {
+public class Tutorial implements Parcelable {
 
     @PrimaryKey @NonNull
     private String title;
@@ -27,6 +30,26 @@ public class Tutorial {
         this.vidLink = vidLink;
         this.tutorialBody = tutorialBody;
     }
+
+    protected Tutorial(Parcel in) {
+        title = in.readString();
+        shortDesc = in.readString();
+        category = in.readString();
+        vidLink = in.readString();
+        tutorialBody = in.readString();
+    }
+
+    public static final Creator<Tutorial> CREATOR = new Creator<Tutorial>() {
+        @Override
+        public Tutorial createFromParcel(Parcel in) {
+            return new Tutorial(in);
+        }
+
+        @Override
+        public Tutorial[] newArray(int size) {
+            return new Tutorial[size];
+        }
+    };
 
     public String getTitle() {
         return title;
@@ -67,4 +90,20 @@ public class Tutorial {
     public void setTutorialBody(String tutorialBody) {
         this.tutorialBody = tutorialBody;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(title);
+        dest.writeString(shortDesc);
+        dest.writeString(category);
+        dest.writeString(vidLink);
+        dest.writeString(tutorialBody);
+    }
+
+
 }

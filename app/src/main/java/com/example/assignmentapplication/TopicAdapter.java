@@ -1,10 +1,12 @@
 package com.example.assignmentapplication;
 
+import android.content.Intent;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -17,22 +19,28 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.MyViewHolder
 
     public TopicAdapter(ArrayList<Tutorial> myDataset){mDataset=myDataset;}
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView textTute;
         public CheckBox checkBox;
+        public LinearLayout topicLayout;
 
         public MyViewHolder(View itemView){
             super(itemView);
             textTute = itemView.findViewById(R.id.textTutorial);
             checkBox = itemView.findViewById(R.id.checkTut);
+            topicLayout = itemView.findViewById(R.id.topicLayout);
 
-            textTute.setOnClickListener(this);
+            topicLayout.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
+            Tutorial mTutorial = mDataset.get(position);
+            Intent tutorialIntent = new Intent(v.getContext(), TutorialVidActivity.class);
+            tutorialIntent.putExtra("TUTORIAL", mTutorial);
+            v.getContext().startActivity(tutorialIntent);
 
         }
     }

@@ -3,9 +3,11 @@ package com.example.assignmentapplication;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.youtube.player.YouTubeBaseActivity;
@@ -18,6 +20,7 @@ public class TutorialVidActivity extends YouTubeBaseActivity implements YouTubeP
     private static final String TAG = "TutorialVidActivity";
     static final String GOOGLE_API_KEY = "AIzaSyBBLP3Q6KTR8Io2-Pox36nGcVL1pr9V7EE";
     private String youtubeVideoId;
+    private TextView body;
 
     private long backPressedTime;
 
@@ -26,10 +29,15 @@ public class TutorialVidActivity extends YouTubeBaseActivity implements YouTubeP
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutorial_vid);
 
+        body = findViewById(R.id.textTutorialBody);
         YouTubePlayerView playerView = (YouTubePlayerView) findViewById(R.id.youtubePlayer);
         playerView.initialize(GOOGLE_API_KEY, this);
 
-        youtubeVideoId = "XEOCbFJjRw0";
+
+        Intent i = getIntent();
+        Tutorial vidTutorial = i.getParcelableExtra("TUTORIAL");
+        body.setText(vidTutorial.getTutorialBody());
+        youtubeVideoId = vidTutorial.getVidLink();
 
     }
 

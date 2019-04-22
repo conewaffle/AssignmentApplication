@@ -148,12 +148,6 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <Button
-                    android:id="@+id/buttonTester"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="goToTutorial"
-                    android:text="Button" />
             </LinearLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

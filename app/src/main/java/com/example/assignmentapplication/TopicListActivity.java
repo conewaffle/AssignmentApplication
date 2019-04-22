@@ -39,7 +39,6 @@ public class TopicListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_topic_list);
         setTitle("Tutorials");
 
-        Button btnTest = findViewById(R.id.buttonTester);
         recyclerView1 = findViewById(R.id.recycler1);
         recyclerView1.setHasFixedSize(true);
         recyclerView1.setLayoutManager(new LinearLayoutManager(this));
@@ -70,11 +69,7 @@ public class TopicListActivity extends AppCompatActivity {
 
     }
 
-    public void goToTutorial(View view){
-        Intent intent = new Intent(TopicListActivity.this, TutorialVidActivity.class);
-        startActivity(intent);
-    }
-
+    //result parameter is an ArrayList containing an ArrayList of tutorials for each category/topic of learning
     private class QueryDBTask extends AsyncTask<Void, Void, ArrayList<ArrayList<Tutorial>>> {
 
         @Override
@@ -82,6 +77,7 @@ public class TopicListActivity extends AppCompatActivity {
             TutorialDatabase db = Room
                     .databaseBuilder(TopicListActivity.this, TutorialDatabase.class, "tutorial-database")
                     .build();
+
                 //casting the List into ArrayList, since the DAO was not working with ArrayLists
                 ArrayList<Tutorial> set1 = (ArrayList<Tutorial>) db.tutorialDao().getResearchingTutorials();
                 ArrayList<Tutorial> set2 = (ArrayList<Tutorial>) db.tutorialDao().getReferencingTutorials();
@@ -102,8 +98,8 @@ public class TopicListActivity extends AppCompatActivity {
     }
 
 
-    //write questions here. the task only executes the inserts if the database does not contain any tutorials.
-    //onPostExecute then executes QueryDBTask
+    //write tutorials here. the task only executes the inserts if the database does not contain any tutorials.
+    //onPostExecute then executes QueryDBTask to ensure serial processing of InsertDBTask and QueryDBTask
     private class InsertDBTask extends AsyncTask<Void, Void, Void>{
 
         @Override
