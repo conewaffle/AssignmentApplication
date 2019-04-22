@@ -47,6 +47,8 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="0"
+                    android:ellipsize="end"
+                    android:singleLine="true"
                     android:text="Author"
                     android:textColor="@android:color/black"
                     android:textSize="12sp"

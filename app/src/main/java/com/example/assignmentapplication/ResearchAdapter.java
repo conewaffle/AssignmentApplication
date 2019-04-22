@@ -63,7 +63,11 @@ public class ResearchAdapter extends RecyclerView.Adapter<ResearchAdapter.Resear
 
     @Override
     public void onBindViewHolder(ResearchViewHolder holder, int position){
-        holder.titleYear.setText(mDataset.get(position).getTitle() + " (" + Integer.toString(mDataset.get(position).getYear()) + ")");
+        if(mDataset.get(position).getYear().equals(null)){
+            holder.titleYear.setText(mDataset.get(position).getTitle() + " (no date)");
+        } else {
+            holder.titleYear.setText(mDataset.get(position).getTitle() + " (" + Integer.toString(mDataset.get(position).getYear()) + ")");
+        }
         if(mDataset.get(position).getAuthors().isEmpty()) {
             holder.author.setText("No Authors");
         } else holder.author.setText(mDataset.get(position).getAuthors().get(0));
