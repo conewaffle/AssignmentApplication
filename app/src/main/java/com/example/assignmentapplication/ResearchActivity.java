@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.assignmentapplication.research.AcademicResponse;
 import com.example.assignmentapplication.research.Datum;
@@ -35,7 +36,7 @@ public class ResearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_research);
-        setTitle("Search for Academic Resources");
+        setTitle("Search for Academic Articles");
 
         progDialog = new ProgressDialog(ResearchActivity.this);
 
@@ -45,17 +46,18 @@ public class ResearchActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        //mAdapter = new ResearchAdapter(new ArrayList<Datum>());
-        //recyclerView.setAdapter(mAdapter);
-
+        //pressing search button takes EditText text and uses it as a query for the API. It checks to ensure the query exists (otherwise API Call would fail)
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String query = searchText.getText().toString();
 
-                GetResourcesTask getResourcesTask = new GetResourcesTask();
-                getResourcesTask.execute(query);
-
+                if(query.isEmpty()){
+                    Toast.makeText(ResearchActivity.this, "Error! There is nothing to search for!", Toast.LENGTH_LONG).show();
+                } else {
+                    GetResourcesTask getResourcesTask = new GetResourcesTask();
+                    getResourcesTask.execute(query);
+                }
             }
         });
 
@@ -68,9 +70,9 @@ public class ResearchActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute(){
             super.onPreExecute();
-            progDialog.setMessage("Loading Sources...");
+            progDialog.setMessage("Loading Academic Articles...");
             progDialog.setIndeterminate(false);
-            progDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             progDialog.setCancelable(true);
             progDialog.show();
         }
