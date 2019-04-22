@@ -14,16 +14,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.SearchView;
 
 import com.example.assignmentapplication.research.AcademicResponse;
-import com.example.assignmentapplication.research.Mod;
-import com.example.assignmentapplication.research.ResearchClient;
+import com.example.assignmentapplication.research.Datum;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ResearchActivity extends AppCompatActivity {
 
@@ -49,6 +45,9 @@ public class ResearchActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        //mAdapter = new ResearchAdapter(new ArrayList<Datum>());
+        //recyclerView.setAdapter(mAdapter);
+
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,12 +63,12 @@ public class ResearchActivity extends AppCompatActivity {
 
     }
 
-    private class GetResourcesTask extends AsyncTask<String, Void, ArrayList<Mod>>{
+    private class GetResourcesTask extends AsyncTask<String, Void, ArrayList<Datum>>{
 
         @Override
         protected void onPreExecute(){
             super.onPreExecute();
-            progDialog.setMessage("Loading Topics...");
+            progDialog.setMessage("Loading Sources...");
             progDialog.setIndeterminate(false);
             progDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
             progDialog.setCancelable(true);
@@ -77,11 +76,11 @@ public class ResearchActivity extends AppCompatActivity {
         }
 
         @Override
-        protected ArrayList<Mod> doInBackground(String... query) {
+        protected ArrayList<Datum> doInBackground(String... query) {
 
             try{
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("https://api.lib.harvard.edu/v2/")
+                        .baseUrl("https://core.ac.uk/api-v2/articles/search/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 
@@ -89,7 +88,7 @@ public class ResearchActivity extends AppCompatActivity {
 
                 Call<AcademicResponse> academicCall = client.getResponse(query[0]);
                 Response<AcademicResponse> academicResponse = academicCall.execute();
-                ArrayList<Mod> myList = (ArrayList<Mod>) academicResponse.body().getItems().getMods();
+                ArrayList<Datum> myList = (ArrayList<Datum>) academicResponse.body().getData();
 
                 return myList;
 
@@ -100,7 +99,7 @@ public class ResearchActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(ArrayList<Mod> result){
+        protected void onPostExecute(ArrayList<Datum> result){
             mAdapter = new ResearchAdapter(result);
             recyclerView.setAdapter(mAdapter);
             progDialog.dismiss();

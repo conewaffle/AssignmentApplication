@@ -1,13 +1,15 @@
 package com.example.assignmentapplication;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.assignmentapplication.research.Mod;
+import com.example.assignmentapplication.research.Datum;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import androidx.cardview.widget.CardView;
@@ -15,9 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ResearchAdapter extends RecyclerView.Adapter<ResearchAdapter.ResearchViewHolder>{
 
-    private ArrayList<Mod> mDataset;
+    private ArrayList<Datum> mDataset;
 
-    public ResearchAdapter(ArrayList<Mod> myDataset){mDataset = myDataset;}
+    public ResearchAdapter(ArrayList<Datum> myDataset){mDataset = myDataset;}
 
     public class ResearchViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
@@ -39,8 +41,16 @@ public class ResearchAdapter extends RecyclerView.Adapter<ResearchAdapter.Resear
         @Override
         public void onClick(View view){
             int position = getAdapterPosition();
-            Mod myMod = mDataset.get(position);
-            String s = myMod.getPhysicalDescription().getExtent();
+            Datum myDatum = mDataset.get(position);
+
+            String s = myDatum.getDownloadUrl();
+            if(s!=null){
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(s));
+                view.getContext().startActivity(browserIntent);
+            } else {
+                Toast.makeText(view.getContext(), "Unfortunately this resource does not have a download link", Toast.LENGTH_LONG);
+            }
+
         }
     }
 
@@ -53,18 +63,14 @@ public class ResearchAdapter extends RecyclerView.Adapter<ResearchAdapter.Resear
 
     @Override
     public void onBindViewHolder(ResearchViewHolder holder, int position){
-        if (mDataset.get(position).getOriginInfo().getPublisher()!=null){
-            holder.pub.setText(mDataset.get(position).getOriginInfo().getPublisher());
-        } else holder.pub.setText("No Publisher");
-        if (mDataset.get(position).getTitleInfo().getTitle()!=null) {
-            holder.titleYear.setText(mDataset.get(position).getTitleInfo().getTitle());
-        } else holder.titleYear.setText("No Title");
-        if (mDataset.get(position).getPhysicalDescription().getExtent()!=null) {
-            holder.author.setText(mDataset.get(position).getPhysicalDescription().getExtent());
-        } else holder.author.setText("No Details");
-        if (mDataset.get(position).getTypeOfResource()!=null) {
-            holder.itemType.setText(mDataset.get(position).getTypeOfResource());
-        } else holder.itemType.setText("No Details");
+        holder.titleYear.setText(mDataset.get(position).getTitle() + " (" + Integer.toString(mDataset.get(position).getYear()) + ")");
+        if(mDataset.get(position).getAuthors().isEmpty()) {
+            holder.author.setText("No Authors");
+        } else holder.author.setText(mDataset.get(position).getAuthors().get(0));
+        holder.pub.setText(mDataset.get(position).getPublisher());
+        if(mDataset.get(position).getSubjects().isEmpty()) {
+            holder.itemType.setText("Data not available");
+        } else holder.itemType.setText(mDataset.get(position).getSubjects().get(0)) ;
     }
 
     @Override

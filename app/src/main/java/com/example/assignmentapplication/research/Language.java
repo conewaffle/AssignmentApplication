@@ -1,22 +1,43 @@
 
 package com.example.assignmentapplication.research;
 
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Language {
 
-    @SerializedName("languageTerm")
+    @SerializedName("code")
     @Expose
-    private List<LanguageTerm> languageTerm = null;
+    private String code;
+    @SerializedName("id")
+    @Expose
+    private Integer id;
+    @SerializedName("name")
+    @Expose
+    private String name;
 
-    public List<LanguageTerm> getLanguageTerm() {
-        return languageTerm;
+    public String getCode() {
+        return code;
     }
 
-    public void setLanguageTerm(List<LanguageTerm> languageTerm) {
-        this.languageTerm = languageTerm;
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
 }

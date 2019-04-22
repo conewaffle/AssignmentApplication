@@ -1,32 +1,44 @@
 
 package com.example.assignmentapplication.research;
 
+import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class AcademicResponse {
 
-    @SerializedName("pagination")
+    @SerializedName("status")
     @Expose
-    private Pagination pagination;
-    @SerializedName("items")
+    private String status;
+    @SerializedName("totalHits")
     @Expose
-    private Items items;
+    private Integer totalHits;
+    @SerializedName("data")
+    @Expose
+    private List<Datum> data = null;
 
-    public Pagination getPagination() {
-        return pagination;
+    public String getStatus() {
+        return status;
     }
 
-    public void setPagination(Pagination pagination) {
-        this.pagination = pagination;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public Items getItems() {
-        return items;
+    public Integer getTotalHits() {
+        return totalHits;
     }
 
-    public void setItems(Items items) {
-        this.items = items;
+    public void setTotalHits(Integer totalHits) {
+        this.totalHits = totalHits;
+    }
+
+    public List<Datum> getData() {
+        return data;
+    }
+
+    public void setData(List<Datum> data) {
+        this.data = data;
     }
 
 }
