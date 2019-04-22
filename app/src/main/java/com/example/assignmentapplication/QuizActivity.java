@@ -144,7 +144,7 @@ public class QuizActivity extends AppCompatActivity {
                     .databaseBuilder(QuizActivity.this, TutorialDatabase.class, "tutorial-database")
                     .build();
             int i = 1;
-            db.quizQuestionDao().insert(new QuizQuestion(i,"What style of referencing is used at UNSW?", "APA", "Harvard", "MLA", "Chicago", 1, "Referencing"));
+            db.quizQuestionDao().insert(new QuizQuestion(i,"What style of referencing is used at UNSW?", "APA", "Harvard", "MLA", "Chicago", 2, "Referencing"));
             i++;
             db.quizQuestionDao().insert(new QuizQuestion(i, "A list of references should be displayed A-Z.", "True", "False, they should be displayed by date order", "False, they should be displayed Z-A", "It doesn't matter", 1, "Referencing"));
             i++;
@@ -164,7 +164,7 @@ public class QuizActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = prefs.edit();
             editor.putInt(QUESTIONS_INITIALISED, 1);
             editor.apply();
-            new QueryQuestionsTask().execute();
+            new QueryQuestionsTask().execute(category);
         }
     }
 
