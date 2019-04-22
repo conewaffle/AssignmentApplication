@@ -42,6 +42,8 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_QUESTIONS_TABLE);
 
         fillQuestionsTable();
+
+
     }
 
     @Override

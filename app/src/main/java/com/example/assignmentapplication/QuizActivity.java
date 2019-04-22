@@ -1,13 +1,16 @@
 //A lot of the code here and throughout the Quiz classes was learnt and sourced from https://codinginflow.com/tutorials/android/quiz-app-with-sqlite/part-1-layouts
-//the code has been adapted, modified and extended where appropriate to suit our application's needs.
+//the code has been adapted to implement ROOM Database instead of their SQLite boilerplate code, and modified to suit our application where appropriate.
 
 package com.example.assignmentapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -17,6 +20,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -26,6 +30,7 @@ import static com.example.assignmentapplication.MasterQuizActivity.CATEGORY;
 
 public class QuizActivity extends AppCompatActivity {
 
+    public static final String QUESTIONS_INITIALISED = "questionsInitialised";
     public static final String EXTRA_SCORE = "extraScore";
     public static final String TOTAL_QUESTIONS = "totalQuestions";
     private static final long COUNTDOWN_IN_MILLIS = 20000;
@@ -90,13 +95,14 @@ public class QuizActivity extends AppCompatActivity {
         setTitle(i.getStringExtra(CATEGORY) + " Quiz");
 
         if(savedInstanceState==null) {
-            //change from sqlite boilerplate to ROOM
-            QuizDbHelper dbHelper = new QuizDbHelper(this);
-            questionList = dbHelper.getQuestions(category);
-            questionCountTotal = questionList.size();
-            Collections.shuffle(questionList);
 
-            showNextQuestion();
+            SharedPreferences checkDbPrefs =  getSharedPreferences(QUESTIONS_INITIALISED, MODE_PRIVATE);
+            if (checkDbPrefs.getInt(QUESTIONS_INITIALISED, 0)!=1) {
+                new InsertQuestionsTask().execute();
+            } else {
+                new QueryQuestionsTask().execute(category);
+            }
+
         } else {
             questionList = savedInstanceState.getParcelableArrayList(KEY_QUESTION_LIST);
             questionCountTotal = questionList.size();
@@ -130,6 +136,61 @@ public class QuizActivity extends AppCompatActivity {
 
         });
     }
+
+    private class InsertQuestionsTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+            TutorialDatabase db = Room
+                    .databaseBuilder(QuizActivity.this, TutorialDatabase.class, "tutorial-database")
+                    .build();
+            int i = 1;
+            db.quizQuestionDao().insert(new QuizQuestion(i,"What style of referencing is used at UNSW?", "APA", "Harvard", "MLA", "Chicago", 1, "Referencing"));
+            i++;
+            db.quizQuestionDao().insert(new QuizQuestion(i, "A list of references should be displayed A-Z.", "True", "False, they should be displayed by date order", "False, they should be displayed Z-A", "It doesn't matter", 1, "Referencing"));
+            i++;
+            db.quizQuestionDao().insert(new QuizQuestion(i, "Which example presents a correct in-text citation?", "(Smith, 1985)", "(Smith 1985)", "(How to reference by John Smith 1985)", "(source 5)", 2, "Referencing"));
+            i++;
+            db.quizQuestionDao().insert(new QuizQuestion(i, "Which of the following types of sources do NOT need to be referenced?", "News", "Blogs", "Youtube Video", "None of the above", 4, "Referencing"));
+            i++;
+            db.quizQuestionDao().insert(new QuizQuestion(i, "Which of the following would be considered a reliable source for a scientific project?", "Wikipedia", "The Onion", "Journal of Science", "None of the above", 3, "Researching"));
+            i++;
+            db.quizQuestionDao().insert(new QuizQuestion(i, "Which of the following can be used to find scholarly articles?", "Google Scholar", "EBSCOHost", "JSTOR", "All of the above", 4, "Researching"));
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            SharedPreferences prefs = getSharedPreferences(QUESTIONS_INITIALISED, MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putInt(QUESTIONS_INITIALISED, 1);
+            editor.apply();
+            new QueryQuestionsTask().execute();
+        }
+    }
+
+    private class QueryQuestionsTask extends AsyncTask<String, Void, ArrayList<QuizQuestion>>{
+        @Override
+        protected ArrayList<QuizQuestion> doInBackground(String... category) {
+            TutorialDatabase db = Room
+                    .databaseBuilder(QuizActivity.this, TutorialDatabase.class, "tutorial-database")
+                    .build();
+            ArrayList<QuizQuestion> myQuestionList = (ArrayList<QuizQuestion>) db.quizQuestionDao().getCategoryQuestions(category[0]);
+            return myQuestionList;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<QuizQuestion> quizQuestions) {
+            questionList = quizQuestions;
+            questionCountTotal = questionList.size();
+            Collections.shuffle(questionList);
+            showNextQuestion();
+        }
+    }
+
+
+
+
+
 
     private void showNextQuestion(){
         rb1.setTextColor(textColorDefaultRb);

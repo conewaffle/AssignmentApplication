@@ -22,6 +22,7 @@ public class QuizQuestion implements Parcelable {
     private int correctAnswer;
     private String category;
 
+    @Ignore
     public QuizQuestion(){
 
     }
