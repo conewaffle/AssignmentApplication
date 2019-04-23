@@ -62,6 +62,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.cardAchievements:
                 intent = new Intent(HomeActivity.this, AchievementsActivity.class);
                 break;
+            case R.id.cardNotes:
+                intent = new Intent(HomeActivity.this, NotesListActivity.class);
             default:
         }
         if (intent != null) {

@@ -20,7 +20,7 @@ public class QuizStartActivity extends AppCompatActivity {
     public static final String KEY_HIGHSCORE = "keyHighScore";
     public static final String KEY_HIGHSCORERESEARCH = "keyHighScoreResearching";
     public static final String KEY_HIGHSCOREREF = "keyHighScoreReferencing";
-    public static final String KEY_HIGHSCORETOPICX = "keyHighScoreTopicX";
+    public static final String KEY_HIGHSCOREWRITE = "keyHighScoreWriting";
 
     private String category;
 

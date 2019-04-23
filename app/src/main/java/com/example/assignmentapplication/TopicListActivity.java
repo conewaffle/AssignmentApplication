@@ -44,13 +44,13 @@ public class TopicListActivity extends AppCompatActivity {
         progDialog = new ProgressDialog(TopicListActivity.this);
 
         recyclerView1 = findViewById(R.id.recycler1);
-        recyclerView1.setHasFixedSize(false);
+        recyclerView1.setHasFixedSize(true);
         recyclerView1.setLayoutManager(new LinearLayoutManager(this));
         recyclerView2 = findViewById(R.id.recycler2);
-        recyclerView2.setHasFixedSize(false);
+        recyclerView2.setHasFixedSize(true);
         recyclerView2.setLayoutManager(new LinearLayoutManager(this));
         recyclerView3 = findViewById(R.id.recycler3);
-        recyclerView3.setHasFixedSize(false);
+        recyclerView3.setHasFixedSize(true);
         recyclerView3.setLayoutManager(new LinearLayoutManager(this));
 
         mAdapter = new TopicAdapter(new ArrayList<Tutorial>());
