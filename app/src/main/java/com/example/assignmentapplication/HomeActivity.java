@@ -18,6 +18,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private CardView cardQuiz;
     private CardView cardSettings;
     private CardView cardResearch;
+    private CardView cardAchievements;
+    private CardView cardNotes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +31,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         cardQuiz = findViewById(R.id.cardQuiz);
         cardSettings = findViewById(R.id.cardSettings);
         cardResearch = findViewById(R.id.cardResearch);
+        cardAchievements = findViewById(R.id.cardAchievements);
+        cardNotes = findViewById(R.id.cardNotes);
 
         cardTopics.setOnClickListener(this);
         cardQuiz.setOnClickListener(this);
         cardSettings.setOnClickListener(this);
         cardResearch.setOnClickListener(this);
+        cardAchievements.setOnClickListener(this);
+        cardNotes.setOnClickListener(this);
 
     }
 
@@ -52,6 +58,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.cardResearch:
                 intent = new Intent(HomeActivity.this, ResearchActivity.class);
+                break;
+            case R.id.cardAchievements:
+                intent = new Intent(HomeActivity.this, AchievementsActivity.class);
+                break;
             default:
         }
         if (intent != null) {

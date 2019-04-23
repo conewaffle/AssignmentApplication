@@ -16,6 +16,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".AchievementsActivity"
+            android:parentActivityName=".HomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
+        </activity>
+        <activity
             android:name=".ResearchActivity"
             android:parentActivityName=".HomeActivity">
             <meta-data
