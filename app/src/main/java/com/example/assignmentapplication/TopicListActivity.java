@@ -126,8 +126,21 @@ public class TopicListActivity extends AppCompatActivity {
                     .databaseBuilder(TopicListActivity.this, TutorialDatabase.class, "tutorial-database")
                     .build();
                 db.tutorialDao().insert(new Tutorial("Introduction to Researching", "This tutorial will introduce you to Researching", "Researching", "XEOCbFJjRw0", "Researching is important for assignments."));
-                db.tutorialDao().insert(new Tutorial("Introduction to Harvard Referencing", "This tutorial will introduce you to Harvard Referencing", "Referencing", "XEOCbFJjRw0", "Harvard referencing is used at UNSW."));
-                db.tutorialDao().insert(new Tutorial("How to Approach the Assignment Question", "This tutorial will discuss how you can approach assignment questions.", "Writing", "XE0CbFJjRw0", "Assignment writing is fun!"));
+                db.tutorialDao().insert(new Tutorial("Introduction to Harvard Referencing", "This tutorial will introduce Harvard Referencing", "Referencing", "iueqJ78iAwk", "During your assignment writing, if you don’t credit your source or present the ideas or words from another as your own, either intentionally or unintentionally, you may be guilty of plagiarism. In this video, we will show you how to properly reference using Harvard referencing method, including how to make in-text citation, reference list and the format of the Harvard method, such as book reference. \n" +
+                        "\n" +
+                        "Studying is not a straight path, you’ll need to study other people’s ideas, words and websites, so you can form your ideas. If you don’t credit your source or present the ideas or words from another as your own, either intentionally or unintentionally, you may be guilty of plagiarism. In this topic, we will show you how to reference using Harvard referencing method properly.\n" +
+                        "\n" +
+                        "In-text citation: allow your readers to link your key points to where your information was sourced. All sources cited with the exception of personal communication and references to classical works need to include an alphabetical reference, a list with the full bibliographical details of all sources at the end of your document. Regardless of whether you are using a direct quote or paraphrasing, you must use an in-text citation.\n" +
+                        "\n" +
+                        "Before you submit your assignment, don’t forget to check all your in-text citations with your reference list. \n"));
+                db.tutorialDao().insert(new Tutorial("Harvard Referencing Tutorial", "This tutorial will show you how to reference different sources.", "Referencing", "prETpsgBU4w", "In this video, we will teach you how to make Harvard reference in your assignment. This video shows what must be included when using Harvard Reference in terms of the reference format of a book, journal article and website with providing some real examples for each type of resources. \n" +
+                        "\n" +
+                        "Book reference: for a book reference, you must include the book author, editor, year of publication, book title, book edition, volume number, place of publication and publisher. These details can be found on the title page and imprint page of a book. \n" +
+                        "\n" +
+                        "Journal article: for a journal article, you must include the author’s name, year of publication, the title of the article, the title of the journal, volume and issue number and page range of the article. These details usually can be found on the front page of the article and sometimes on the front cover of the journal. \n" +
+                        "\n" +
+                        "Website: for a website, you must include the author’s name, the year the page was created or updated, title of the webpage, the full URL and the date you accessed the webpage.  \n"));
+                db.tutorialDao().insert(new Tutorial("How to Approach the Assignment Question", "This tutorial will discuss how you can approach assignment questions.", "Writing", "XEOCbFJjRw0", "Assignment writing is fun!"));
                 return null;
         }
 
