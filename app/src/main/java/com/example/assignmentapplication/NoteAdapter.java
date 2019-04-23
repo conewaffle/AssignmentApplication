@@ -1,5 +1,6 @@
 package com.example.assignmentapplication;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder> {
+
+    public static final String NOTE_PARCEL = "noteParcel";
 
     private ArrayList<Note> mDataset;
 
@@ -37,7 +40,10 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         @Override
         public void onClick(View v){
             int position = getAdapterPosition();
-
+            Note myNote = mDataset.get(position);
+            Intent viewIntent = new Intent(v.getContext(), NoteViewActivity.class);
+            viewIntent.putExtra(NOTE_PARCEL, myNote);
+            v.getContext().startActivity(viewIntent);
         }
     }
 

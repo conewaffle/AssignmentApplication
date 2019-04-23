@@ -1,5 +1,8 @@
 package com.example.assignmentapplication;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
 import androidx.annotation.NonNull;
@@ -7,7 +10,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "note")
-public class Note {
+public class Note implements Parcelable {
 
     @PrimaryKey(autoGenerate = true) @NonNull
     private int id;
@@ -15,12 +18,31 @@ public class Note {
     private String date;
     private String body;
 
-    public Note(String subject, String date, String body){
+    public Note(int id, String subject, String date, String body){
         this.subject = subject;
         this.date = date;
         this.body = body;
+        this.id=id;
     }
 
+    protected Note(Parcel in) {
+        id = in.readInt();
+        subject = in.readString();
+        date = in.readString();
+        body = in.readString();
+    }
+
+    public static final Creator<Note> CREATOR = new Creator<Note>() {
+        @Override
+        public Note createFromParcel(Parcel in) {
+            return new Note(in);
+        }
+
+        @Override
+        public Note[] newArray(int size) {
+            return new Note[size];
+        }
+    };
 
     public String getSubject() {
         return subject;
@@ -52,5 +74,18 @@ public class Note {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(subject);
+        dest.writeString(date);
+        dest.writeString(body);
     }
 }

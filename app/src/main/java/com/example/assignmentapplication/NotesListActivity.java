@@ -6,9 +6,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -16,6 +20,7 @@ public class NotesListActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private NoteAdapter mAdapter;
+    private FloatingActionButton createNote;
     private ProgressDialog progDialog;
 
     @Override
@@ -30,11 +35,19 @@ public class NotesListActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        createNote = findViewById(R.id.btnCreateNote);
+        createNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(NotesListActivity.this, NoteCreateActivity.class);
+                startActivity(intent);
+            }
+        });
+
         GetNoteTask getNoteTask = new GetNoteTask();
         getNoteTask.execute();
 
     }
-
 
     private class GetNoteTask extends AsyncTask<Void, Void, ArrayList<Note>> {
 
@@ -67,22 +80,4 @@ public class NotesListActivity extends AppCompatActivity {
         }
     }
 
-
-    //put this in an activity that writes notes.
-    private class InsertNoteTask extends AsyncTask<Void, Void, Void>{
-
-        @Override
-        protected Void doInBackground(Void...voids){
-            TutorialDatabase db = Room
-                    .databaseBuilder(NotesListActivity.this, TutorialDatabase.class, "tutorial-database")
-                    .build();
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            new GetNoteTask().execute();
-        }
-    }
 }

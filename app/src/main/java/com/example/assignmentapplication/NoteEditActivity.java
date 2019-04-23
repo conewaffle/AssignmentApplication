@@ -15,7 +15,9 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class NoteCreateActivity extends AppCompatActivity {
+import static com.example.assignmentapplication.NoteAdapter.NOTE_PARCEL;
+
+public class NoteEditActivity extends AppCompatActivity {
 
     private EditText noteEdit;
     private Button noteSave;
@@ -31,30 +33,33 @@ public class NoteCreateActivity extends AppCompatActivity {
         noteEdit = findViewById(R.id.noteEdit);
         subjectEdit = findViewById(R.id.subjectEdit);
 
-        progDialog = new ProgressDialog(NoteCreateActivity.this);
+        progDialog = new ProgressDialog(NoteEditActivity.this);
+
+        Intent i = getIntent();
+        final Note mynote = i.getParcelableExtra(NOTE_PARCEL);
+        noteEdit.setText(mynote.getBody());
+        subjectEdit.setText(mynote.getSubject());
 
         noteSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (noteEdit.getText().toString().isEmpty() || subjectEdit.getText().toString().isEmpty()) {
-                    Toast.makeText(NoteCreateActivity.this, "Your Note or Subject cannot be empty!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(NoteEditActivity.this, "Your Note or Subject cannot be empty!", Toast.LENGTH_LONG).show();
                 } else {
                     String noteBody = noteEdit.getText().toString();
                     Calendar calendar = Calendar.getInstance();
                     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
                     String dateString = sdf.format(calendar.getTime());
                     String noteSubject = subjectEdit.getText().toString();
-                    Note myNote = new Note(0, noteSubject, dateString, noteBody);
-                    InsertNoteTask insertNoteTask = new InsertNoteTask();
-                    insertNoteTask.execute(myNote);
+                    Note newNote = new Note(mynote.getId(), noteSubject, dateString, noteBody);
+                    UpdateNoteTask updateNoteTask = new UpdateNoteTask();
+                    updateNoteTask.execute(newNote);
                 }
             }
         });
 
     }
-
-    //inserts note into database
-    private class InsertNoteTask extends AsyncTask<Note, Void, Void> {
+    private class UpdateNoteTask extends AsyncTask<Note, Void, Void> {
 
         @Override
         protected void onPreExecute(){
@@ -69,10 +74,10 @@ public class NoteCreateActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Note... note){
             TutorialDatabase db = Room
-                    .databaseBuilder(NoteCreateActivity.this, TutorialDatabase.class, "tutorial-database")
+                    .databaseBuilder(NoteEditActivity.this, TutorialDatabase.class, "tutorial-database")
                     .build();
 
-            db.noteDao().insert(note[0]);
+            db.noteDao().upDateNote(note[0]);
 
             return null;
         }
@@ -80,10 +85,9 @@ public class NoteCreateActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             progDialog.dismiss();
-            Toast.makeText(NoteCreateActivity.this, "Note Saved", Toast.LENGTH_LONG).show();
+            Toast.makeText(NoteEditActivity.this, "Note Saved", Toast.LENGTH_LONG).show();
             finish();
         }
     }
-
 
 }
