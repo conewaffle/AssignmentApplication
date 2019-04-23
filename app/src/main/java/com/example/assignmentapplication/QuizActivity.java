@@ -155,6 +155,24 @@ public class QuizActivity extends AppCompatActivity {
             db.quizQuestionDao().insert(new QuizQuestion(i, "Which of the following would be considered a reliable source for a scientific project?", "Wikipedia", "The Onion", "Journal of Science", "None of the above", 3, "Researching"));
             i++;
             db.quizQuestionDao().insert(new QuizQuestion(i, "Which of the following can be used to find scholarly articles?", "Google Scholar", "EBSCOHost", "JSTOR", "All of the above", 4, "Researching"));
+            i++;
+            db.quizQuestionDao().insert(new QuizQuestion(i, "Vincent is required to submit a list of only the sources he used in his assignment. What should he submit with his assignment?", "A Reference List", "A citations Database List", "A photo of himself", "A bibliography", 1, "Referencing"));
+            i++;
+            db.quizQuestionDao().insert(new QuizQuestion(i, "Look at the reference below. What type of publication is it?\n" + "Cardwell, M. (2010) A-Z psychology handbook. 4th ed. Deddington: Philip Allan Updates.",  "Journal article", "Website ", "Book","None of the above", 3, "Referencing"));
+            i++;
+            db.quizQuestionDao().insert(new QuizQuestion(i, "What is a good reference for a finance research essay?", "Friend's word", "TV Advertisement", "Academic Paper", "None of the Above", 3, "Researching"));
+            i++;
+            db.quizQuestionDao().insert(new QuizQuestion(i, "Jake enters 'java -programming' into Google's searchbar. He is triying to:", "Get results that include java but not programming", "Get results that include both java and programming", "Get results where java and programming are in the same sentence", "None of the above", 1, "Researching" ));
+            i++;
+            db.quizQuestionDao().insert(new QuizQuestion(i, "Putting double quotations marks around a search term: ", "Gets results that are related to quotes someone said", "Gets results that are an exact match", "Gets results that figuratively mean the same thing", "None of the above", 2, "Researching"));
+            i++;
+            db.quizQuestionDao().insert(new QuizQuestion(i, "Which is the least to be considered when writing a paper?", "Keeping track of relevant articles you've read", "Researching the topic before writing", "Paying attention to vocabulary and grammar","Having a sugary drink to energise yourself", 4, "Writing"));
+            i++;
+            db.quizQuestionDao().insert(new QuizQuestion(i, "Which of the following can adversely affect your marks?", "Using as much complex vocabulary as possible", "Stating points clearly", "Citing references appropriately", "Being concise", 1, "Writing"));
+            i++;
+            db.quizQuestionDao().insert(new QuizQuestion(i, "Which of the following is not important when writing an assignment?", "Paying attention to the assignment question", "The lecturer's name", "The key concepts", "Limiting and qualifying words", 2, "Writing"));
+            i++;
+            db.quizQuestionDao().insert(new QuizQuestion(i, "What is a good way of gaining a deeper understanding of a word?","Using Cambridge Dictionary", "Using Longman Dictionary", "Using Urban Dictionary", "A and B are correct", 4, "Writing"));
             return null;
         }
 
@@ -186,9 +204,6 @@ public class QuizActivity extends AppCompatActivity {
             showNextQuestion();
         }
     }
-
-
-
 
 
 

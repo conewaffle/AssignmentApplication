@@ -13,6 +13,7 @@ import android.widget.Toast;
 import static com.example.assignmentapplication.QuizStartActivity.KEY_HIGHSCORE;
 import static com.example.assignmentapplication.QuizStartActivity.KEY_HIGHSCOREREF;
 import static com.example.assignmentapplication.QuizStartActivity.KEY_HIGHSCORERESEARCH;
+import static com.example.assignmentapplication.QuizStartActivity.KEY_HIGHSCOREWRITE;
 import static com.example.assignmentapplication.QuizStartActivity.SHARED_PREFS;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -54,6 +55,7 @@ public class SettingsActivity extends AppCompatActivity {
         editor.putInt(KEY_HIGHSCORE, 0);
         editor.putInt(KEY_HIGHSCOREREF, 0);
         editor.putInt(KEY_HIGHSCORERESEARCH,0);
+        editor.putInt(KEY_HIGHSCOREWRITE, 0);
         editor.apply();
     }
 }
