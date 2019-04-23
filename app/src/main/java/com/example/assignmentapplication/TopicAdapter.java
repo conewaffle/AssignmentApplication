@@ -34,6 +34,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.MyViewHolder
             topicLayout.setOnClickListener(this);
         }
 
+        //clicking on the topic starts the tutorial
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
@@ -41,10 +42,8 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.MyViewHolder
             Intent tutorialIntent = new Intent(v.getContext(), TutorialVidActivity.class);
             tutorialIntent.putExtra("TUTORIAL", mTutorial);
             v.getContext().startActivity(tutorialIntent);
-
         }
     }
-
 
     @Override
     public TopicAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){

@@ -73,7 +73,7 @@ public class TopicListActivity extends AppCompatActivity {
 
     }
 
-    //result parameter is an ArrayList containing an ArrayList of tutorials for each category/topic of learning
+    //result is an ArrayList containing an ArrayList of tutorials for each category/topic of learning
     private class QueryDBTask extends AsyncTask<Void, Void, ArrayList<ArrayList<Tutorial>>> {
 
         @Override
@@ -81,7 +81,7 @@ public class TopicListActivity extends AppCompatActivity {
             super.onPreExecute();
             progDialog.setMessage("Loading Topics...");
             progDialog.setIndeterminate(false);
-            progDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             progDialog.setCancelable(true);
             progDialog.show();
         }
