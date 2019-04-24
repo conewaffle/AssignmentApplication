@@ -39,6 +39,7 @@ public class NoteEditActivity extends AppCompatActivity {
         final Note mynote = i.getParcelableExtra(NOTE_PARCEL);
         noteEdit.setText(mynote.getBody());
         subjectEdit.setText(mynote.getSubject());
+        setTitle("Edit " + mynote.getSubject());
 
         noteSave.setOnClickListener(new View.OnClickListener() {
             @Override

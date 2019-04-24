@@ -17,6 +17,7 @@ public class Note implements Parcelable {
     private String subject;
     private String date;
     private String body;
+    //Date is a String since ROOM was not able to handle Date type
 
     public Note(int id, String subject, String date, String body){
         this.subject = subject;

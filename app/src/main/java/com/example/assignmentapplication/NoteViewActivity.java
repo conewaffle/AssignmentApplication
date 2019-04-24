@@ -30,6 +30,7 @@ public class NoteViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_view);
 
+
         subject = findViewById(R.id.viewnoteSubject);
         body = findViewById(R.id.viewNoteBody);
         date = findViewById(R.id.viewNoteDate);
@@ -43,6 +44,7 @@ public class NoteViewActivity extends AppCompatActivity {
         subject.setText(myNote.getSubject());
         date.setText(myNote.getDate());
         body.setText(myNote.getBody());
+        setTitle(myNote.getSubject());
 
         edit.setOnClickListener(new View.OnClickListener() {
             @Override

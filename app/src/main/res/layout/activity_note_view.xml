@@ -14,6 +14,9 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:text="Subject"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/viewNoteDate"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,6 +28,9 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:text="06 Jan 2019"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,6 +43,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:text="TextView"
+        android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -54,7 +61,7 @@
         app:backgroundTint="@color/colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/btnDeleteNote"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/notes" />
+        app:srcCompat="@drawable/ic_edit_wrhite_24dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnDeleteNote"
@@ -66,5 +73,5 @@
         app:backgroundTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_delete" />
+        app:srcCompat="@drawable/ic_delete_wrhite_24dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

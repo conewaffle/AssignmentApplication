@@ -38,6 +38,7 @@ public class TutorialVidActivity extends YouTubeBaseActivity implements YouTubeP
         Tutorial vidTutorial = i.getParcelableExtra("TUTORIAL");
         body.setText(vidTutorial.getTutorialBody());
         youtubeVideoId = vidTutorial.getVidLink();
+        setTitle(vidTutorial.getTitle());
 
     }
 
