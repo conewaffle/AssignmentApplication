@@ -12,8 +12,6 @@ import android.widget.ImageView;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
 
-    public static final String TOTAL_POINTS = "totalPoints";
-
     private CardView cardTopics;
     private CardView cardQuiz;
     private CardView cardSettings;

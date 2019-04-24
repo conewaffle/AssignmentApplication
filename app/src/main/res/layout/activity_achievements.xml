@@ -39,7 +39,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="8dp"
-                android:text="100"
+                android:text="9999"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
                 android:textSize="56sp"
@@ -58,6 +58,17 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textPoints" />
+
+            <Button
+                android:id="@+id/btnSharePoints"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@color/colorPrimary"
+                android:onClick="sharePoints"
+                android:text="Share Points"
+                android:textAllCaps="false"
+                android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
         </LinearLayout>
     </ScrollView>

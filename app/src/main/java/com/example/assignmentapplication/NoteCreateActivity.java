@@ -15,6 +15,8 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import static com.example.assignmentapplication.TutorialVidActivity.TUTE_TOPIC;
+
 public class NoteCreateActivity extends AppCompatActivity {
 
     private EditText noteEdit;
@@ -30,8 +32,18 @@ public class NoteCreateActivity extends AppCompatActivity {
         noteSave = findViewById(R.id.btnSaveNote);
         noteEdit = findViewById(R.id.noteEdit);
         subjectEdit = findViewById(R.id.subjectEdit);
+        setTitle("New Note");
 
         progDialog = new ProgressDialog(NoteCreateActivity.this);
+
+        Intent intent = getIntent();
+
+        //receives the intent if from the Tutorial Activity to populate the subject and produce a message.
+        if (intent.getStringExtra(TUTE_TOPIC)==null){
+        } else {
+            subjectEdit.setText(intent.getStringExtra(TUTE_TOPIC));
+            Toast.makeText(NoteCreateActivity.this, "Create notes on what you have just learnt!", Toast.LENGTH_LONG).show();
+        }
 
         noteSave.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,12 +18,17 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 
+import static com.example.assignmentapplication.QuizStartActivity.SHARED_PREFS;
+
 public class TutorialVidActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
 
     private static final String TAG = "TutorialVidActivity";
+    public static final String TUTE_TOPIC = "tuteTopic";
     static final String GOOGLE_API_KEY = "AIzaSyBBLP3Q6KTR8Io2-Pox36nGcVL1pr9V7EE";
     private String youtubeVideoId;
     private TextView body;
+    private Button endButton;
+    private int videoFinished = 0;
 
     private long backPressedTime;
 
@@ -30,15 +38,29 @@ public class TutorialVidActivity extends YouTubeBaseActivity implements YouTubeP
         setContentView(R.layout.activity_tutorial_vid);
 
         body = findViewById(R.id.textTutorialBody);
+        endButton = findViewById(R.id.btnFinishTute);
         YouTubePlayerView playerView = (YouTubePlayerView) findViewById(R.id.youtubePlayer);
         playerView.initialize(GOOGLE_API_KEY, this);
 
-
         Intent i = getIntent();
-        Tutorial vidTutorial = i.getParcelableExtra("TUTORIAL");
+        final Tutorial vidTutorial = i.getParcelableExtra("TUTORIAL");
         body.setText(vidTutorial.getTutorialBody());
         youtubeVideoId = vidTutorial.getVidLink();
         setTitle(vidTutorial.getTitle());
+
+        endButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(videoFinished==0){
+                    Toast.makeText(TutorialVidActivity.this, "You have not finished the video yet! Use back button to leave tutorial early.", Toast.LENGTH_LONG).show();
+                } else {
+                    Intent noteIntent = new Intent(TutorialVidActivity.this, NoteCreateActivity.class);
+                    noteIntent.putExtra(TUTE_TOPIC, vidTutorial.getTitle());
+                    v.getContext().startActivity(noteIntent);
+                    finish();
+                }
+            }
+        });
 
     }
 
@@ -68,32 +90,29 @@ public class TutorialVidActivity extends YouTubeBaseActivity implements YouTubeP
     private YouTubePlayer.PlayerStateChangeListener playerStateChangeListener = new YouTubePlayer.PlayerStateChangeListener() {
         @Override
         public void onLoading() {
-
         }
 
         @Override
         public void onLoaded(String s) {
-
         }
 
         @Override
         public void onAdStarted() {
-
         }
 
         @Override
         public void onVideoStarted() {
-
         }
 
         @Override
         public void onVideoEnded() {
-            Toast.makeText(TutorialVidActivity.this, "You have earned 50 stars for finishing this video!", Toast.LENGTH_LONG).show();
+            Toast.makeText(TutorialVidActivity.this, "You have earned 10 points for finishing this video!", Toast.LENGTH_LONG).show();
+            videoFinished = 1;
+            AchievementsActivity.addPoints(TutorialVidActivity.this, 10);
         }
 
         @Override
         public void onError(YouTubePlayer.ErrorReason errorReason) {
-
         }
     };
 
@@ -102,9 +121,11 @@ public class TutorialVidActivity extends YouTubeBaseActivity implements YouTubeP
         if(backPressedTime+2000>System.currentTimeMillis()){
             finish();
         } else {
-            Toast.makeText(this, "Press back again to exit tutorial without finishing", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Press back again to exit tutorial.", Toast.LENGTH_SHORT).show();
         }
         backPressedTime = System.currentTimeMillis();
     }
+
+
 
 }

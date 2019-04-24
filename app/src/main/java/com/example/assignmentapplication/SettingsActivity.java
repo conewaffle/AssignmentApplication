@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -16,10 +17,13 @@ import static com.example.assignmentapplication.QuizStartActivity.KEY_HIGHSCORER
 import static com.example.assignmentapplication.QuizStartActivity.KEY_HIGHSCOREWRITE;
 import static com.example.assignmentapplication.QuizStartActivity.SHARED_PREFS;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity{
+
+    private Button btnResetScores;
+    private Button btnResetPoitns;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         setTitle("Settings");
@@ -43,7 +47,23 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
 
-        //reset points
+        Button btnPoints = findViewById(R.id.btnResetPoints);
+        btnPoints.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(SettingsActivity.this)
+                        .setTitle("Confirm Reset")
+                        .setMessage("Are you sure you want to reset your points?")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                int currentPoints = -1*(AchievementsActivity.getPoints(SettingsActivity.this));
+                                AchievementsActivity.addPoints(SettingsActivity.this, currentPoints);
+                                Toast.makeText(SettingsActivity.this, "Points have been reset.", Toast.LENGTH_LONG).show();
+                            }})
+                        .setNegativeButton(android.R.string.no, null).show();
+            }
+        });
 
     }
 

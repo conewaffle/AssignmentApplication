@@ -64,7 +64,7 @@ public class TopicListActivity extends AppCompatActivity {
         //this value will determine whether the app will insert tutorials into database, or proceed directly to querying them
         SharedPreferences checkDbPrefs =  getSharedPreferences(DATABASE_INITIALISED, MODE_PRIVATE);
 
-        //since we don't assign the value (1) for DATABASE_INITIALISED until insertDbTask we check for inequality to 1 rather than equality to 0
+        //since we don't assign the value (1) for DATABASE_INITIALISED until insertDbTask, we check for inequality to 1 rather than equality to 0
         if (checkDbPrefs.getInt(DATABASE_INITIALISED, 0)!=1) {
             new InsertDBTask().execute();
         } else {

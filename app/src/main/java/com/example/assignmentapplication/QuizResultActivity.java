@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import static com.example.assignmentapplication.MasterQuizActivity.CATEGORY;
 import static com.example.assignmentapplication.QuizActivity.EXTRA_SCORE;
@@ -42,19 +43,13 @@ public class QuizResultActivity extends AppCompatActivity {
 
         textScore.setText(score + "/" + totalQuestions);
 
-        grade = ((double)score/(double)totalQuestions)*100;
+        //this method adds a message and changes colour of score depending on how good it was.
+        setGrade(score, totalQuestions);
 
-        if(grade<50){
-          gradeMessage.setText("Further study is required.");
-          textScore.setTextColor(getResources().getColor(R.color.colorIncorrect));
-        } else if(grade<75){
-            gradeMessage.setText("You can do better!");
-            textScore.setTextColor(Color.BLACK);
-        } else {
-            gradeMessage.setText("Well Done!");
-            textScore.setTextColor(getResources().getColor(R.color.colorCorrect));
-        }
-
+        //updates the points
+        int pointsAdded = score*2;
+        Toast.makeText(QuizResultActivity.this, "You have earned " + pointsAdded + " points!", Toast.LENGTH_LONG).show();
+        AchievementsActivity.addPoints(QuizResultActivity.this, pointsAdded);
     }
 
     public void endReview(View view){
@@ -73,6 +68,20 @@ public class QuizResultActivity extends AppCompatActivity {
         startActivity(Intent.createChooser(sharingIntent, "Share Via"));
     }
 
+    public void setGrade(int score, int totalQuestions){
+        grade = ((double)score/(double)totalQuestions)*100;
+
+        if(grade<50){
+            gradeMessage.setText("Further study is required.");
+            textScore.setTextColor(getResources().getColor(R.color.colorIncorrect));
+        } else if(grade<75){
+            gradeMessage.setText("You can do better!");
+            textScore.setTextColor(Color.BLACK);
+        } else {
+            gradeMessage.setText("Well Done!");
+            textScore.setTextColor(getResources().getColor(R.color.colorCorrect));
+        }
+    }
 
 
 }

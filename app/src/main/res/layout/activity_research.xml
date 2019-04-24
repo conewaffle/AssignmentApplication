@@ -16,16 +16,18 @@
         <EditText
             android:id="@+id/searchText"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="5"
             android:ems="10"
             android:hint="e.g. Harvard Referencing"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/btnSearch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:background="@color/colorPrimary"
             android:text="Search"
