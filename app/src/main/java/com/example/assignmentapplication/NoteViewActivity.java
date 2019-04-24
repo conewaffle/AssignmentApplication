@@ -49,6 +49,7 @@ public class NoteViewActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent editIntent = new Intent(NoteViewActivity.this, NoteEditActivity.class);
                 editIntent.putExtra(NOTE_PARCEL, myNote);
+                editIntent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                 startActivity(editIntent);
                 finish();
             }

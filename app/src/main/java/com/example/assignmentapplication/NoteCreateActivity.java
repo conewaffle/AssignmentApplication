@@ -79,6 +79,8 @@ public class NoteCreateActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void aVoid) {
+            Intent intent = new Intent();
+            setResult(RESULT_OK, intent);
             progDialog.dismiss();
             Toast.makeText(NoteCreateActivity.this, "Note Saved", Toast.LENGTH_LONG).show();
             finish();

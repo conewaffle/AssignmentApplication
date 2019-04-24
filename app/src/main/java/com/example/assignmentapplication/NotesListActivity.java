@@ -1,5 +1,6 @@
 package com.example.assignmentapplication;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,13 +41,22 @@ public class NotesListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(NotesListActivity.this, NoteCreateActivity.class);
-                startActivity(intent);
+                int requestCode = 1;
+                startActivityForResult(intent, 1);
+                //we start activity for intent so that returning here from create/edit note activities calls onActivityForResult so the recyclerView is updated with new data
             }
         });
 
         GetNoteTask getNoteTask = new GetNoteTask();
         getNoteTask.execute();
+    }
 
+    //every time we come back to this activity from the create/edit activities we want the recyclerView to update with any new data.
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        GetNoteTask getNoteTask = new GetNoteTask();
+        getNoteTask.execute();
     }
 
     private class GetNoteTask extends AsyncTask<Void, Void, ArrayList<Note>> {

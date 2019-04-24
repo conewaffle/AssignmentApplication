@@ -1,5 +1,6 @@
 package com.example.assignmentapplication;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +44,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
             Note myNote = mDataset.get(position);
             Intent viewIntent = new Intent(v.getContext(), NoteViewActivity.class);
             viewIntent.putExtra(NOTE_PARCEL, myNote);
-            v.getContext().startActivity(viewIntent);
+            int resultCode = 1;
+            ((Activity) v.getContext()).startActivityForResult(viewIntent, 1);
         }
     }
 
