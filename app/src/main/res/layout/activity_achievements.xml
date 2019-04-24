@@ -70,6 +70,41 @@
                 android:textAllCaps="false"
                 android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
+            <TextView
+                android:id="@+id/textShared"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="You have shared things X times"
+                android:textAlignment="center"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused" />
+
+            <TextView
+                android:id="@+id/textNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="You have written X sets of notes"
+                android:textAlignment="center"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Earn a badge when you have gained 100 points!"
+                android:textAlignment="center" />
+
+            <ImageView
+                android:id="@+id/badge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@android:color/transparent"
+                android:scaleType="centerInside"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/badge" />
+
         </LinearLayout>
     </ScrollView>
 

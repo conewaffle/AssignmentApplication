@@ -7,7 +7,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import static com.example.assignmentapplication.QuizStartActivity.SHARED_PREFS;
 
@@ -17,10 +21,11 @@ public class AchievementsActivity extends AppCompatActivity {
     public static final String KEY_POINTS = "totalPoints";
     public static final String TIMES_SHARED = "timesShared";
     public static final String NOTES_WRITTEN = "notesWritten";
-    public static final String SOURCES_DOWNLOADED = "sourcesDownloaded";
-    public static final String TUTES_COMPLETED = "tutesCompleted";
 
     private TextView textPoints;
+    private TextView textShared;
+    private TextView textNotes;
+    private ImageView badge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +34,22 @@ public class AchievementsActivity extends AppCompatActivity {
         setTitle("Progress");
 
         textPoints = findViewById(R.id.textPoints);
-        textPoints.setText(Integer.toString(getPoints(this)));
+        textShared = findViewById(R.id.textShared);
+        textNotes = findViewById(R.id.textNotes);
+        badge = findViewById(R.id.badge);
+
+        getProgress(this);
+
+    }
+
+    public void getProgress(Context context){
+        int i = getPoints(context);
+        textPoints.setText(i);
+        textShared.setText("You have shared progress "+ getShares(context) + " times.");
+        textNotes.setText("You have written " + getNotes(context) + " sets of notes!");
+        if(i>=200){
+            badge.setVisibility(View.VISIBLE);
+        }
 
     }
 
@@ -55,5 +75,47 @@ public class AchievementsActivity extends AppCompatActivity {
         sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "UNSW1001 App is fun!");
         sharingIntent.putExtra(Intent.EXTRA_TEXT, shareMsg);
         startActivity(Intent.createChooser(sharingIntent, "Share Via"));
+        addShare(AchievementsActivity.this);
+        getProgress(AchievementsActivity.this);
+    }
+
+    public static void addShare(Context context){
+        SharedPreferences sharedPrefs = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPrefs.edit();
+        int timesShared = sharedPrefs.getInt(TIMES_SHARED, 0);
+        int newShared = timesShared + 1;
+        editor.putInt(TIMES_SHARED, newShared);
+        editor.commit();
+
+        if(newShared%5==0){
+            addPoints(context, 10);
+            Toast.makeText(context, "You have earned 10 points from sharing 5 times!", Toast.LENGTH_SHORT).show();
+        }
+    }
+    public static int getShares(Context context){
+        SharedPreferences sharedPrefs = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        int timesShared = sharedPrefs.getInt(TIMES_SHARED, 0);
+        return timesShared;
+    }
+
+    public static void addNotes(Context context){
+        SharedPreferences sharedPrefs = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPrefs.edit();
+        int notesWritten = sharedPrefs.getInt(NOTES_WRITTEN, 0);
+        int newNotes = notesWritten + 1;
+        editor.putInt(TIMES_SHARED, newNotes);
+        editor.commit();
+
+        if(newNotes%5==0){
+            addPoints(context, 10);
+            Toast.makeText(context, "You have earned 10 points from making 5 sets of notes!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static int getNotes(Context context){
+        SharedPreferences sharedPrefs = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        int notesWritten = sharedPrefs.getInt(NOTES_WRITTEN, 0);
+        return notesWritten;
+
     }
 }

@@ -66,6 +66,7 @@ public class QuizResultActivity extends AppCompatActivity {
         sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "I just finished a quiz!");
         sharingIntent.putExtra(Intent.EXTRA_TEXT, shareMsg);
         startActivity(Intent.createChooser(sharingIntent, "Share Via"));
+        AchievementsActivity.addShare(QuizResultActivity.this);
     }
 
     public void setGrade(int score, int totalQuestions){

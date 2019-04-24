@@ -59,6 +59,7 @@ public class NoteCreateActivity extends AppCompatActivity {
                     Note myNote = new Note(0, noteSubject, dateString, noteBody);
                     InsertNoteTask insertNoteTask = new InsertNoteTask();
                     insertNoteTask.execute(myNote);
+                    AchievementsActivity.addNotes(NoteCreateActivity.this);
                 }
             }
         });
