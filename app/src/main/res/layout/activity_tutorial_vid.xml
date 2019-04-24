@@ -10,6 +10,7 @@
         android:id="@+id/scrollViewTut"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +40,7 @@
                 android:layout_margin="16dp"
                 android:text="Body Text"
                 android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
 
         </LinearLayout>

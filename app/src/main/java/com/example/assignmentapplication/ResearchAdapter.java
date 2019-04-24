@@ -48,7 +48,7 @@ public class ResearchAdapter extends RecyclerView.Adapter<ResearchAdapter.Resear
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(s));
                 view.getContext().startActivity(browserIntent);
             } else {
-                Toast.makeText(view.getContext(), "Unfortunately this resource does not have a download link", Toast.LENGTH_LONG);
+                Toast.makeText(view.getContext(), "Unfortunately this resource does not have a download link", Toast.LENGTH_LONG).show();
             }
 
         }
@@ -68,11 +68,13 @@ public class ResearchAdapter extends RecyclerView.Adapter<ResearchAdapter.Resear
         } else {
             holder.titleYear.setText(mDataset.get(position).getTitle() + " (" + Integer.toString(mDataset.get(position).getYear()) + ")");
         }
+
         if(mDataset.get(position).getAuthors().isEmpty()) {
             holder.author.setText("No Authors");
-        } else {
-            holder.author.setText(mDataset.get(position).getAuthors().get(0));
-        }
+        } else if (mDataset.get(position).getAuthors().size()==1){
+                holder.author.setText(mDataset.get(position).getAuthors().get(0));
+        } else {holder.author.setText(mDataset.get(position).getAuthors().get(0) + " et al.");}
+
         if(mDataset.get(position).getPublisher()==null){
             holder.pub.setText("No Publisher");
         } else {

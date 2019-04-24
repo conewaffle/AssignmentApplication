@@ -31,6 +31,8 @@
             android:layout_weight="1"
             android:background="@color/colorPrimary"
             android:text="Reset"
+            android:textAlignment="center"
+            android:textAllCaps="false"
             android:textColor="@android:color/white" />
     </LinearLayout>
 </LinearLayout>
