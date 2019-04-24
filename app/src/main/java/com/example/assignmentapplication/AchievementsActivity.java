@@ -26,6 +26,8 @@ public class AchievementsActivity extends AppCompatActivity {
     private TextView textShared;
     private TextView textNotes;
     private ImageView badge;
+    private ImageView badge2;
+    private ImageView badge3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,20 +39,30 @@ public class AchievementsActivity extends AppCompatActivity {
         textShared = findViewById(R.id.textShared);
         textNotes = findViewById(R.id.textNotes);
         badge = findViewById(R.id.badge);
+        badge2 = findViewById(R.id.badge2);
+        badge3 = findViewById(R.id.badge3);
 
+        //by setting UI content in a method, i can call this method whenever points change within this activity (e.g. sharing points leads to more share count).
         getProgress(this);
 
     }
 
     public void getProgress(Context context){
         int i = getPoints(context);
-        textPoints.setText(i);
-        textShared.setText("You have shared progress "+ getShares(context) + " times.");
-        textNotes.setText("You have written " + getNotes(context) + " sets of notes!");
-        if(i>=200){
+        textPoints.setText(String.valueOf(i));
+        int shares = getShares(context);
+        textShared.setText("You have shared progress "+ String.valueOf(shares) + " times.");
+        int notes = getNotes(context);
+        textNotes.setText("You have written " + String.valueOf(notes) + " sets of notes!");
+        if(i>=100){
             badge.setVisibility(View.VISIBLE);
         }
-
+        if(shares>=10){
+            badge2.setVisibility(View.VISIBLE);
+        }
+        if(notes>=10){
+            badge3.setVisibility(View.VISIBLE);
+        }
     }
 
     public static int getPoints(Context context){
@@ -103,7 +115,7 @@ public class AchievementsActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPrefs.edit();
         int notesWritten = sharedPrefs.getInt(NOTES_WRITTEN, 0);
         int newNotes = notesWritten + 1;
-        editor.putInt(TIMES_SHARED, newNotes);
+        editor.putInt(NOTES_WRITTEN, newNotes);
         editor.commit();
 
         if(newNotes%5==0){

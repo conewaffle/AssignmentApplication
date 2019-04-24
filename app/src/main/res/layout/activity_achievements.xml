@@ -92,18 +92,48 @@
                 android:id="@+id/textView13"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Earn a badge when you have gained 100 points!"
+                android:layout_margin="16dp"
+                android:text="Earn badges by reaching: 100 points, 10 shares and 10 notes."
                 android:textAlignment="center" />
 
-            <ImageView
-                android:id="@+id/badge"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:background="@android:color/transparent"
-                android:scaleType="centerInside"
-                android:visibility="invisible"
-                app:srcCompat="@drawable/badge" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/badge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:scaleType="centerInside"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/badge" />
+
+                <ImageView
+                    android:id="@+id/badge2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:scaleType="centerInside"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/badge" />
+
+                <ImageView
+                    android:id="@+id/badge3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:scaleType="centerInside"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/badge" />
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
