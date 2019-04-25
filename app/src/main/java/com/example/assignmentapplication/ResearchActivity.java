@@ -101,14 +101,20 @@ public class ResearchActivity extends AppCompatActivity {
             }
         }
 
+        //first check null result, THEN check if total hits 0 (otherwise Java Null Pointer Exception)
+        //null results caused by querying symbols that impact the URL of the API Call
         @Override
         protected void onPostExecute(AcademicResponse result){
-            if (result.getTotalHits()==0){
+            if (result.getTotalHits()==null){
                 Toast.makeText(ResearchActivity.this, "No Search Results Found!", Toast.LENGTH_LONG).show();
             } else {
-                ArrayList<Datum> myList = (ArrayList<Datum>) result.getData();
-                mAdapter = new ResearchAdapter(myList);
-                recyclerView.setAdapter(mAdapter);
+                if(result.getTotalHits()==0){
+                    Toast.makeText(ResearchActivity.this, "No Search Results Found!", Toast.LENGTH_LONG).show();
+                } else {
+                    ArrayList<Datum> myList = (ArrayList<Datum>) result.getData();
+                    mAdapter = new ResearchAdapter(myList);
+                    recyclerView.setAdapter(mAdapter);
+                }
             }
 
             progDialog.dismiss();
