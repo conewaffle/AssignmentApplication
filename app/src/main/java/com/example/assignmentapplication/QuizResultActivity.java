@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import static com.example.assignmentapplication.MasterQuizActivity.CATEGORY;
 import static com.example.assignmentapplication.QuizActivity.EXTRA_SCORE;
 import static com.example.assignmentapplication.QuizActivity.TOTAL_QUESTIONS;
@@ -18,7 +20,7 @@ public class QuizResultActivity extends AppCompatActivity {
 
     private TextView textScore;
     private TextView gradeMessage;
-    private Button buttonShare;
+    private FloatingActionButton buttonShare;
     private Button buttonEndQuiz;
     private double grade;
     private int score;
@@ -35,6 +37,7 @@ public class QuizResultActivity extends AppCompatActivity {
         textScore = findViewById(R.id.textScore);
         buttonEndQuiz = findViewById(R.id.btnEndQuiz);
         gradeMessage = findViewById(R.id.textGradeMsg);
+        buttonShare = findViewById(R.id.btnShare);
 
         Intent i = getIntent();
         score = i.getIntExtra(EXTRA_SCORE,0);
@@ -42,6 +45,13 @@ public class QuizResultActivity extends AppCompatActivity {
         category = i.getStringExtra(CATEGORY);
 
         textScore.setText(score + "/" + totalQuestions);
+
+        buttonShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shareResult(v);
+            }
+        });
 
         //this method adds a message and changes colour of score depending on how good it was.
         setGrade(score, totalQuestions);

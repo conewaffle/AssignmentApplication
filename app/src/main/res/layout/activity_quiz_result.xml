@@ -56,24 +56,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/textYouScored"
                 app:layout_constraintVertical_bias="0.110000014" />
 
-            <Button
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/btnShare"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:background="@color/colorPrimary"
-                android:onClick="shareResult"
-                android:text="Share"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:textSize="16sp"
+                android:layout_marginTop="24dp"
                 android:clickable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textScore"
-                app:layout_constraintVertical_bias="0.110000014" />
+                app:fabSize="mini"
+                app:srcCompat="@drawable/ic_share_white_24dp" />
         </LinearLayout>
     </ScrollView>
 

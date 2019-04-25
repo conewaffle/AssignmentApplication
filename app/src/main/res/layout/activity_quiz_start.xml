@@ -50,7 +50,9 @@
             android:layout_margin="16dp"
             android:clickable="true"
             app:backgroundTint="@color/colorAccent"
+            app:fabCustomSize="@dimen/share_icon_size"
             app:fabSize="mini"
+            app:maxImageSize="@dimen/share_icon_size"
             app:srcCompat="@drawable/ic_help_white_24dp" />
 
     </LinearLayout>
