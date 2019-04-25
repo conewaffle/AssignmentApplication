@@ -45,11 +45,6 @@ public class QuizResultActivity extends AppCompatActivity {
 
         //this method adds a message and changes colour of score depending on how good it was.
         setGrade(score, totalQuestions);
-
-        //updates the points
-        int pointsAdded = score*2;
-        Toast.makeText(QuizResultActivity.this, "You have earned " + pointsAdded + " points!", Toast.LENGTH_LONG).show();
-        AchievementsActivity.addPoints(QuizResultActivity.this, pointsAdded);
     }
 
     public void endReview(View view){

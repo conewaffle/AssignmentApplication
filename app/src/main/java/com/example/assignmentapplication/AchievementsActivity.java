@@ -128,6 +128,13 @@ public class AchievementsActivity extends AppCompatActivity {
         SharedPreferences sharedPrefs = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         int notesWritten = sharedPrefs.getInt(NOTES_WRITTEN, 0);
         return notesWritten;
+    }
 
+    public static void resetCounts(Context context){
+        SharedPreferences sharedPrefs = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPrefs.edit();
+        editor.putInt(TIMES_SHARED, 0);
+        editor.putInt(NOTES_WRITTEN,0);
+        editor.commit();
     }
 }

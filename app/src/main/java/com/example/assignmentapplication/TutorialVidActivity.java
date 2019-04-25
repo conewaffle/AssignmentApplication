@@ -28,6 +28,7 @@ public class TutorialVidActivity extends YouTubeBaseActivity implements YouTubeP
     private String youtubeVideoId;
     private TextView body;
     private Button endButton;
+    private TextView overview;
     private int videoFinished = 0;
 
     private long backPressedTime;
@@ -39,11 +40,14 @@ public class TutorialVidActivity extends YouTubeBaseActivity implements YouTubeP
 
         body = findViewById(R.id.textTutorialBody);
         endButton = findViewById(R.id.btnFinishTute);
+        overview = findViewById(R.id.textShortDesc);
+
         YouTubePlayerView playerView = (YouTubePlayerView) findViewById(R.id.youtubePlayer);
         playerView.initialize(GOOGLE_API_KEY, this);
 
         Intent i = getIntent();
         final Tutorial vidTutorial = i.getParcelableExtra("TUTORIAL");
+        overview.setText(vidTutorial.getShortDesc());
         body.setText(vidTutorial.getTutorialBody());
         youtubeVideoId = vidTutorial.getVidLink();
         setTitle(vidTutorial.getTitle());

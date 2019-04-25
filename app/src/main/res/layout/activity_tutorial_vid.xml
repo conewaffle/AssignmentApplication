@@ -35,6 +35,14 @@
             </com.google.android.youtube.player.YouTubePlayerView>
 
             <TextView
+                android:id="@+id/textShortDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="Lesson Overview:"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused" />
+
+            <TextView
                 android:id="@+id/textTutorialBody"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -20,7 +20,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_weight="10"
-            android:text="Reset All Quiz High Scores"
+            android:text="Reset Quiz High Scores"
             android:textAlignment="textStart"
             android:textColor="@android:color/black" />
 
@@ -64,6 +64,66 @@
             android:layout_weight="0"
             android:background="@color/colorPrimary"
             android:text="Reset"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:layout_weight="10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:text="Reset Share and Note Count"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused" />
+
+        <Button
+            android:id="@+id/btnResetCounts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="0"
+            android:background="@color/colorPrimary"
+            android:text="Reset"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:layout_weight="10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:text="Delete All Notes"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused" />
+
+        <Button
+            android:id="@+id/btnDeleteNotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="0"
+            android:background="@color/colorPrimary"
+            android:text="Delete"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="@android:color/white" />
