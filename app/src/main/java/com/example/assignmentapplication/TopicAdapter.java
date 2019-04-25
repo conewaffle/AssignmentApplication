@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
@@ -27,15 +28,15 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.MyViewHolder
 
         public TextView textTute;
         public CheckBox checkBox;
-        public LinearLayout topicLayout;
+        public CardView cardTopic;
 
         public MyViewHolder(View itemView){
             super(itemView);
             textTute = itemView.findViewById(R.id.textTutorial);
             checkBox = itemView.findViewById(R.id.checkTut);
-            topicLayout = itemView.findViewById(R.id.topicLayout);
+            cardTopic = itemView.findViewById(R.id.cardTopic);
 
-            topicLayout.setOnClickListener(this);
+            cardTopic.setOnClickListener(this);
             checkBox.setOnClickListener(this);
         }
 
