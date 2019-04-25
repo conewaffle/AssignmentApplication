@@ -17,6 +17,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import static com.example.assignmentapplication.MasterQuizActivity.CATEGORY;
 
+//
 public class QuizStartActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_QUIZ = 1;

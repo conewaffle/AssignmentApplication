@@ -1,11 +1,9 @@
-//A lot of the code here and throughout the Quiz classes was learnt and sourced from https://codinginflow.com/tutorials/android/quiz-app-with-sqlite/part-1-layouts
-//the code has been adapted to implement ROOM Database instead of their SQLite boilerplate code, and modified to suit our application where appropriate.
-
 package com.example.assignmentapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
@@ -28,6 +26,9 @@ import java.util.Locale;
 
 import static com.example.assignmentapplication.MasterQuizActivity.CATEGORY;
 
+//A lot of the code to do with quiz functionality has been learnt from https://codinginflow.com/tutorials/android/quiz-app-with-sqlite/
+//However, the code has been adapted for best practices e.g. ROOM Library instead of SQLite boilerplate code, and AsyncTasks for DB tasks
+// and other changes where required to suit our application.
 public class QuizActivity extends AppCompatActivity {
 
     public static final String QUESTIONS_INITIALISED = "questionsInitialised";
@@ -66,7 +67,6 @@ public class QuizActivity extends AppCompatActivity {
 
     private int score;
     private boolean answered;
-
     private long backPressedTime;
 
 
@@ -138,6 +138,19 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private class InsertQuestionsTask extends AsyncTask<Void, Void, Void> {
+
+        ProgressDialog progDialog = new ProgressDialog(QuizActivity.this);
+
+        @Override
+        protected void onPreExecute(){
+            super.onPreExecute();
+            progDialog.setMessage("Loading Questions...");
+            progDialog.setIndeterminate(false);
+            progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progDialog.setCancelable(true);
+            progDialog.show();
+        }
+
         @Override
         protected Void doInBackground(Void... voids) {
             TutorialDatabase db = Room
@@ -162,7 +175,7 @@ public class QuizActivity extends AppCompatActivity {
             i++;
             db.quizQuestionDao().insert(new QuizQuestion(i, "What is a good reference for a finance research essay?", "Friend's word", "TV Advertisement", "Academic Paper", "None of the Above", 3, "Researching"));
             i++;
-            db.quizQuestionDao().insert(new QuizQuestion(i, "Jake enters 'java -programming' into Google's searchbar. He is triying to:", "Get results that include java but not programming", "Get results that include both java and programming", "Get results where java and programming are in the same sentence", "None of the above", 1, "Researching" ));
+            db.quizQuestionDao().insert(new QuizQuestion(i, "Jake enters 'java -programming' into Google's searchbar. He is trying to:", "Get results that include java but not programming", "Get results that include both java and programming", "Get results where java and programming are in the same sentence", "None of the above", 1, "Researching" ));
             i++;
             db.quizQuestionDao().insert(new QuizQuestion(i, "Putting double quotations marks around a search term: ", "Gets results that are related to quotes someone said", "Gets results that are an exact match", "Gets results that figuratively mean the same thing", "None of the above", 2, "Researching"));
             i++;
@@ -182,11 +195,25 @@ public class QuizActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = prefs.edit();
             editor.putInt(QUESTIONS_INITIALISED, 1);
             editor.apply();
+            progDialog.dismiss();
             new QueryQuestionsTask().execute(category);
         }
     }
 
     private class QueryQuestionsTask extends AsyncTask<String, Void, ArrayList<QuizQuestion>>{
+
+        ProgressDialog progDialog = new ProgressDialog(QuizActivity.this);
+
+        @Override
+        protected void onPreExecute(){
+            super.onPreExecute();
+            progDialog.setMessage("Loading Questions...");
+            progDialog.setIndeterminate(false);
+            progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progDialog.setCancelable(true);
+            progDialog.show();
+        }
+
         @Override
         protected ArrayList<QuizQuestion> doInBackground(String... category) {
             TutorialDatabase db = Room
@@ -202,6 +229,7 @@ public class QuizActivity extends AppCompatActivity {
             questionCountTotal = questionList.size();
             Collections.shuffle(questionList);
             showNextQuestion();
+            progDialog.dismiss();
         }
     }
 
