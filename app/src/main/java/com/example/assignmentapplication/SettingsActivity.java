@@ -95,7 +95,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                                 deleteTask.execute();
                             }})
                         .setNegativeButton(android.R.string.no, null).show();
-
+            default:
         }
 
 

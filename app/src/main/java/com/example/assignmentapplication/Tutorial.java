@@ -17,18 +17,20 @@ public class Tutorial implements Parcelable {
     private String category;
     private String vidLink;
     private String tutorialBody;
+    private int completed;
 
     @Ignore
     public Tutorial(){
 
     }
 
-    public Tutorial(String title, String shortDesc, String category, String vidLink, String tutorialBody) {
+    public Tutorial(String title, String shortDesc, String category, String vidLink, String tutorialBody, int completed) {
         this.title = title;
         this.shortDesc = shortDesc;
         this.category = category;
         this.vidLink = vidLink;
         this.tutorialBody = tutorialBody;
+        this.completed = completed;
     }
 
     protected Tutorial(Parcel in) {
@@ -37,6 +39,7 @@ public class Tutorial implements Parcelable {
         category = in.readString();
         vidLink = in.readString();
         tutorialBody = in.readString();
+        completed = in.readInt();
     }
 
     public static final Creator<Tutorial> CREATOR = new Creator<Tutorial>() {
@@ -91,6 +94,14 @@ public class Tutorial implements Parcelable {
         this.tutorialBody = tutorialBody;
     }
 
+    public int getCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(int completed) {
+        this.completed = completed;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -103,6 +114,7 @@ public class Tutorial implements Parcelable {
         dest.writeString(category);
         dest.writeString(vidLink);
         dest.writeString(tutorialBody);
+        dest.writeInt(completed);
     }
 
 
