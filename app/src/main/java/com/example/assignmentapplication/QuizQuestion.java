@@ -11,7 +11,7 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "quizquestion")
 public class QuizQuestion implements Parcelable {
-    @PrimaryKey
+    @PrimaryKey (autoGenerate = true)
     @NonNull
     private int id;
     private String question;

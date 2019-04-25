@@ -156,36 +156,26 @@ public class QuizActivity extends AppCompatActivity {
             TutorialDatabase db = Room
                     .databaseBuilder(QuizActivity.this, TutorialDatabase.class, "tutorial-database")
                     .build();
-            int i = 1;
-            db.quizQuestionDao().insert(new QuizQuestion(i,"What style of referencing is used at UNSW?", "APA", "Harvard", "MLA", "Chicago", 2, "Referencing"));
-            i++;
-            db.quizQuestionDao().insert(new QuizQuestion(i, "A list of references should be displayed A-Z.", "True", "False, they should be displayed by date order", "False, they should be displayed Z-A", "It doesn't matter", 1, "Referencing"));
-            i++;
-            db.quizQuestionDao().insert(new QuizQuestion(i, "Which example presents a correct in-text citation?", "(Smith, 1985)", "(Smith 1985)", "(How to reference by John Smith 1985)", "(source 5)", 2, "Referencing"));
-            i++;
-            db.quizQuestionDao().insert(new QuizQuestion(i, "Which of the following types of sources do NOT need to be referenced?", "News", "Blogs", "Youtube Video", "None of the above", 4, "Referencing"));
-            i++;
-            db.quizQuestionDao().insert(new QuizQuestion(i, "Which of the following would be considered a reliable source for a scientific project?", "Wikipedia", "The Onion", "Journal of Science", "None of the above", 3, "Researching"));
-            i++;
-            db.quizQuestionDao().insert(new QuizQuestion(i, "Which of the following can be used to find scholarly articles?", "Google Scholar", "EBSCOHost", "JSTOR", "All of the above", 4, "Researching"));
-            i++;
-            db.quizQuestionDao().insert(new QuizQuestion(i, "Vincent is required to submit a list of only the sources he used in his assignment. What should he submit with his assignment?", "A Reference List", "A citations Database List", "A photo of himself", "A bibliography", 1, "Referencing"));
-            i++;
-            db.quizQuestionDao().insert(new QuizQuestion(i, "Look at the reference below. What type of publication is it?\n" + "Cardwell, M. (2010) A-Z psychology handbook. 4th ed. Deddington: Philip Allan Updates.",  "Journal article", "Website ", "Book","None of the above", 3, "Referencing"));
-            i++;
-            db.quizQuestionDao().insert(new QuizQuestion(i, "What is a good reference for a finance research essay?", "Friend's word", "TV Advertisement", "Academic Paper", "None of the Above", 3, "Researching"));
-            i++;
-            db.quizQuestionDao().insert(new QuizQuestion(i, "Jake enters 'java -programming' into Google's searchbar. He is trying to:", "Get results that include java but not programming", "Get results that include both java and programming", "Get results where java and programming are in the same sentence", "None of the above", 1, "Researching" ));
-            i++;
-            db.quizQuestionDao().insert(new QuizQuestion(i, "Putting double quotations marks around a search term: ", "Gets results that are related to quotes someone said", "Gets results that are an exact match", "Gets results that figuratively mean the same thing", "None of the above", 2, "Researching"));
-            i++;
-            db.quizQuestionDao().insert(new QuizQuestion(i, "Which is the least to be considered when writing a paper?", "Keeping track of relevant articles you've read", "Researching the topic before writing", "Paying attention to vocabulary and grammar","Having a sugary drink to energise yourself", 4, "Writing"));
-            i++;
-            db.quizQuestionDao().insert(new QuizQuestion(i, "Which of the following can adversely affect your marks?", "Using as much complex vocabulary as possible", "Stating points clearly", "Citing references appropriately", "Being concise", 1, "Writing"));
-            i++;
-            db.quizQuestionDao().insert(new QuizQuestion(i, "Which of the following is not important when writing an assignment?", "Paying attention to the assignment question", "The lecturer's name", "The key concepts", "Limiting and qualifying words", 2, "Writing"));
-            i++;
-            db.quizQuestionDao().insert(new QuizQuestion(i, "What is a good way of gaining a deeper understanding of a word?","Using Cambridge Dictionary", "Using Longman Dictionary", "Using Urban Dictionary", "A and B are correct", 4, "Writing"));
+            db.quizQuestionDao().insert(new QuizQuestion(0,"What style of referencing is used at UNSW?", "APA", "Harvard", "MLA", "Chicago", 2, "Referencing"));
+            db.quizQuestionDao().insert(new QuizQuestion(0, "A list of references should be displayed A-Z.", "True", "False, they should be displayed by date order", "False, they should be displayed Z-A", "It doesn't matter", 1, "Referencing"));
+            db.quizQuestionDao().insert(new QuizQuestion(0, "Which example presents a correct in-text citation?", "(Smith, 1985)", "(Smith 1985)", "(How to reference by John Smith 1985)", "(source 5)", 2, "Referencing"));
+            db.quizQuestionDao().insert(new QuizQuestion(0, "Which of the following types of sources do NOT need to be referenced?", "News", "Blogs", "Youtube Video", "None of the above", 4, "Referencing"));
+            db.quizQuestionDao().insert(new QuizQuestion(0, "Which of the following would be considered a reliable source for a scientific project?", "Wikipedia", "The Onion", "Journal of Science", "None of the above", 3, "Researching"));
+            db.quizQuestionDao().insert(new QuizQuestion(0, "Which of the following can be used to find scholarly articles?", "Google Scholar", "EBSCOHost", "JSTOR", "All of the above", 4, "Researching"));
+            db.quizQuestionDao().insert(new QuizQuestion(0, "Vincent is required to submit a list of only the sources he used in his assignment. What should he submit with his assignment?", "A Reference List", "A citations Database List", "A photo of himself", "A bibliography", 1, "Referencing"));
+            db.quizQuestionDao().insert(new QuizQuestion(0, "Look at the reference below. What type of publication is it?\n" + "Cardwell, M. (2010) A-Z psychology handbook. 4th ed. Deddington: Philip Allan Updates.",  "Journal article", "Website ", "Book","None of the above", 3, "Referencing"));
+            db.quizQuestionDao().insert(new QuizQuestion(0, "What is a good reference for a finance research essay?", "Friend's word", "TV Advertisement", "Academic Paper", "None of the Above", 3, "Researching"));
+            db.quizQuestionDao().insert(new QuizQuestion(0, "Jake enters 'java -programming' into Google's searchbar. He is trying to:", "Get results that include java but not programming", "Get results that include both java and programming", "Get results where java and programming are in the same sentence", "None of the above", 1, "Researching" ));
+            db.quizQuestionDao().insert(new QuizQuestion(0, "Putting double quotations marks around a search term: ", "Gets results that are related to quotes someone said", "Gets results that are an exact match", "Gets results that figuratively mean the same thing", "None of the above", 2, "Researching"));
+            db.quizQuestionDao().insert(new QuizQuestion(0, "Which is the least to be considered when writing a paper?", "Keeping track of relevant articles you've read", "Researching the topic before writing", "Paying attention to vocabulary and grammar","Having a sugary drink to energise yourself", 4, "Writing"));
+            db.quizQuestionDao().insert(new QuizQuestion(0, "Which of the following can adversely affect your marks?", "Using as much complex vocabulary as possible", "Stating points clearly", "Citing references appropriately", "Being concise", 1, "Writing"));
+            db.quizQuestionDao().insert(new QuizQuestion(0, "Which of the following is not important when writing an assignment?", "Paying attention to the assignment question", "The lecturer's name", "The key concepts", "Limiting and qualifying words", 2, "Writing"));
+            db.quizQuestionDao().insert(new QuizQuestion(0, "What is a good way of gaining a deeper understanding of a word?","Using Cambridge Dictionary", "Using Longman Dictionary", "Using Urban Dictionary", "A and B are correct", 4, "Writing"));
+            db.quizQuestionDao().insert(new QuizQuestion(0, "The difference between an abstract and an introduction is:", "An abstract is at the end of a report", "There is no difference. Both are the same", "An abstract summarises the report in full", "An introduction summarises the report in full", 3, "Writing"));
+            db.quizQuestionDao().insert(new QuizQuestion(0, "The conclusion of an essay:", "Introduces the topic", "Re-summarises the main points", "Is where you develop your argument", "All of the above", 3, "Writing"));
+            db.quizQuestionDao().insert(new QuizQuestion(0, "The components of an essay's body paragraph could follow:", "Evidence, Analysis, Topic Sentence", "Topic Sentence, Evidence, Analysis", "Analysis, Evidence, Topic Sentence", "None of the above", 2, "Writing"));
+            db.quizQuestionDao().insert(new QuizQuestion(0, "Which part of a scholarly article would be useful for your reading?", "Abstract", "Introduction", "Reference List", "All of the above", 4, "Researching"));
+            db.quizQuestionDao().insert(new QuizQuestion(0, "A correct way for putting authors in a reference list is:", "Use 'First Author' et al. when there are multiple authors", "Write their full names", "Use initial for surname e.g. 'Max S' for Max Smith", "Use initials for first name e.g. 'Smith, J' for John Smith", 4, "Referencing"));
             return null;
         }
 
