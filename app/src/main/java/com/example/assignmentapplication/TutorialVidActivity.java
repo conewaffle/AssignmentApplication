@@ -40,6 +40,7 @@ public class TutorialVidActivity extends YouTubeBaseActivity implements YouTubeP
 
         body = findViewById(R.id.textTutorialBody);
         endButton = findViewById(R.id.btnFinishTute);
+        endButton.setAlpha(0.3f);
         overview = findViewById(R.id.textShortDesc);
 
         YouTubePlayerView playerView = (YouTubePlayerView) findViewById(R.id.youtubePlayer);
@@ -73,7 +74,7 @@ public class TutorialVidActivity extends YouTubeBaseActivity implements YouTubeP
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean wasRestored) {
         Log.d(TAG,"onInitializationSuccess: provider is " + provider.getClass().toString());
-        Toast.makeText(this, "Player Loaded", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Player Loaded", Toast.LENGTH_SHORT).show();
 
         youTubePlayer.setPlayerStateChangeListener(playerStateChangeListener);
 
@@ -112,7 +113,7 @@ public class TutorialVidActivity extends YouTubeBaseActivity implements YouTubeP
 
         @Override
         public void onVideoEnded() {
-            Toast.makeText(TutorialVidActivity.this, "Video finished.", Toast.LENGTH_SHORT).show();
+            endButton.setAlpha(1f);
             videoFinished = 1;
         }
 
