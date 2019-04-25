@@ -48,12 +48,14 @@ public class TutorialVidActivity extends YouTubeBaseActivity implements YouTubeP
         youtubeVideoId = vidTutorial.getVidLink();
         setTitle(vidTutorial.getTitle());
 
+        //finishing the tutorial adds points and leads to the note creation activity.
         endButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(videoFinished==0){
                     Toast.makeText(TutorialVidActivity.this, "You have not finished the video yet! Use back button to leave tutorial early.", Toast.LENGTH_LONG).show();
                 } else {
+                    AchievementsActivity.addPoints(TutorialVidActivity.this, 10);
                     Intent noteIntent = new Intent(TutorialVidActivity.this, NoteCreateActivity.class);
                     noteIntent.putExtra(TUTE_TOPIC, vidTutorial.getTitle());
                     v.getContext().startActivity(noteIntent);
@@ -106,9 +108,8 @@ public class TutorialVidActivity extends YouTubeBaseActivity implements YouTubeP
 
         @Override
         public void onVideoEnded() {
-            Toast.makeText(TutorialVidActivity.this, "You have earned 10 points for finishing this video!", Toast.LENGTH_LONG).show();
+            Toast.makeText(TutorialVidActivity.this, "Video finished.", Toast.LENGTH_SHORT).show();
             videoFinished = 1;
-            AchievementsActivity.addPoints(TutorialVidActivity.this, 10);
         }
 
         @Override

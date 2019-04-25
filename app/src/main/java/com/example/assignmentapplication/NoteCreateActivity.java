@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 import static com.example.assignmentapplication.TutorialVidActivity.TUTE_TOPIC;
 
@@ -42,20 +43,28 @@ public class NoteCreateActivity extends AppCompatActivity {
         if (intent.getStringExtra(TUTE_TOPIC)==null){
         } else {
             subjectEdit.setText(intent.getStringExtra(TUTE_TOPIC));
-            Toast.makeText(NoteCreateActivity.this, "Create notes on what you have just learnt!", Toast.LENGTH_LONG).show();
+            Toast.makeText(NoteCreateActivity.this, "You earned 10 points for finishing the tutorial!", Toast.LENGTH_LONG).show();
+            noteEdit.setHint("Write notes here on what you have just learnt!");
         }
 
+        //saves the note into database. ensures body is populated.
         noteSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (noteEdit.getText().toString().isEmpty() || subjectEdit.getText().toString().isEmpty()) {
-                    Toast.makeText(NoteCreateActivity.this, "Your Note or Subject cannot be empty!", Toast.LENGTH_LONG).show();
+                if (noteEdit.getText().toString().isEmpty()) {
+                    Toast.makeText(NoteCreateActivity.this, "Your note cannot be empty!", Toast.LENGTH_LONG).show();
                 } else {
                     String noteBody = noteEdit.getText().toString();
+
                     Calendar calendar = Calendar.getInstance();
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
                     String dateString = sdf.format(calendar.getTime());
+
                     String noteSubject = subjectEdit.getText().toString();
+                    if (noteSubject.isEmpty()){
+                        noteSubject = "No Subject";
+                    }
+
                     Note myNote = new Note(0, noteSubject, dateString, noteBody);
                     InsertNoteTask insertNoteTask = new InsertNoteTask();
                     insertNoteTask.execute(myNote);

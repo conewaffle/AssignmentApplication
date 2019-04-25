@@ -56,10 +56,14 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         return vh;
     }
 
+    //if the subject is No Subject, the adapter sets text to the note's body instead.
     @Override
     public void onBindViewHolder(NoteAdapter.NoteViewHolder holder, int position){
-        holder.subject.setText(mDataset.get(position).getSubject());
         holder.date.setText(mDataset.get(position).getDate());
+        if(mDataset.get(position).getSubject().equals("No Subject")){
+            holder.subject.setText(mDataset.get(position).getBody());
+        } else
+        holder.subject.setText(mDataset.get(position).getSubject());
     }
 
     @Override
