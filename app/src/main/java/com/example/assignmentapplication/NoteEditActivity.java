@@ -45,7 +45,7 @@ public class NoteEditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (noteEdit.getText().toString().isEmpty() || subjectEdit.getText().toString().isEmpty()) {
-                    Toast.makeText(NoteEditActivity.this, "Your Note or Subject cannot be empty!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(NoteEditActivity.this, "Your Note or Subject cannot be empty!", Toast.LENGTH_SHORT).show();
                 } else {
                     String noteBody = noteEdit.getText().toString();
                     Calendar calendar = Calendar.getInstance();
@@ -88,7 +88,7 @@ public class NoteEditActivity extends AppCompatActivity {
             Intent intent = new Intent();
             setResult(RESULT_OK, intent);
             progDialog.dismiss();
-            Toast.makeText(NoteEditActivity.this, "Note Saved", Toast.LENGTH_LONG).show();
+            Toast.makeText(NoteEditActivity.this, "Note Saved", Toast.LENGTH_SHORT).show();
             finish();
         }
     }

@@ -100,7 +100,7 @@ public class NoteViewActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             progDialog.dismiss();
-            Toast.makeText(NoteViewActivity.this, "Note Deleted", Toast.LENGTH_LONG).show();
+            Toast.makeText(NoteViewActivity.this, "Note Deleted", Toast.LENGTH_SHORT).show();
             finish();
         }
     }

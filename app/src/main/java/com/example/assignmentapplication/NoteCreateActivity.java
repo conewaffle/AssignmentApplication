@@ -43,7 +43,7 @@ public class NoteCreateActivity extends AppCompatActivity {
         if (intent.getStringExtra(TUTE_TOPIC)==null){
         } else {
             subjectEdit.setText(intent.getStringExtra(TUTE_TOPIC));
-            Toast.makeText(NoteCreateActivity.this, "You earned 10 points for finishing the tutorial!", Toast.LENGTH_LONG).show();
+            Toast.makeText(NoteCreateActivity.this, "You earned 10 points for finishing the tutorial!", Toast.LENGTH_SHORT).show();
             noteEdit.setHint("Write notes here on what you have just learnt!");
         }
 
@@ -52,7 +52,7 @@ public class NoteCreateActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (noteEdit.getText().toString().isEmpty()) {
-                    Toast.makeText(NoteCreateActivity.this, "Your note cannot be empty!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(NoteCreateActivity.this, "Your note cannot be empty!", Toast.LENGTH_SHORT).show();
                 } else {
                     String noteBody = noteEdit.getText().toString();
 
@@ -104,7 +104,7 @@ public class NoteCreateActivity extends AppCompatActivity {
             Intent intent = new Intent();
             setResult(RESULT_OK, intent);
             progDialog.dismiss();
-            Toast.makeText(NoteCreateActivity.this, "Note Saved", Toast.LENGTH_LONG).show();
+            Toast.makeText(NoteCreateActivity.this, "Note Saved", Toast.LENGTH_SHORT).show();
             finish();
         }
     }
