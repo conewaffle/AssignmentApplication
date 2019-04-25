@@ -38,6 +38,8 @@
         android:layout_marginTop="8dp"
         android:background="@color/colorPrimary"
         android:text="Save Note"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

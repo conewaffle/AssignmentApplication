@@ -63,6 +63,8 @@
         android:text="Finish Tutorial"
         android:textAllCaps="false"
         android:textColor="@color/common_google_signin_btn_text_dark_default"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

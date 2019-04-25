@@ -66,6 +66,8 @@
                 android:layout_marginTop="24dp"
                 android:background="@color/colorPrimary"
                 android:onClick="sharePoints"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:text="Share Points"
                 android:textAllCaps="false"
                 android:textColor="@color/common_google_signin_btn_text_dark_default" />
