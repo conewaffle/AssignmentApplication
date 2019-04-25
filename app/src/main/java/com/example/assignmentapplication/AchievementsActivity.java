@@ -1,8 +1,10 @@
 package com.example.assignmentapplication;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,7 +18,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import static com.example.assignmentapplication.QuizStartActivity.SHARED_PREFS;
 
 //class also includes methods to globally get and add points and other metrics
-public class AchievementsActivity extends AppCompatActivity {
+public class AchievementsActivity extends AppCompatActivity implements View.OnClickListener{
 
     public static final String KEY_POINTS = "totalPoints";
     public static final String TIMES_SHARED = "timesShared";
@@ -28,6 +30,8 @@ public class AchievementsActivity extends AppCompatActivity {
     private ImageView badge;
     private ImageView badge2;
     private ImageView badge3;
+    private FloatingActionButton fabBadge;
+    private FloatingActionButton fabPoints;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,20 +42,42 @@ public class AchievementsActivity extends AppCompatActivity {
         textPoints = findViewById(R.id.textPoints);
         textShared = findViewById(R.id.textShared);
         textNotes = findViewById(R.id.textNotes);
+        fabBadge = findViewById(R.id.fabBadge);
+        fabPoints = findViewById(R.id.fabPoints);
         badge = findViewById(R.id.badge);
         badge2 = findViewById(R.id.badge2);
         badge3 = findViewById(R.id.badge3);
+
+        fabPoints.setOnClickListener(this);
+        fabBadge.setOnClickListener(this);
 
         //by setting UI content in a method, i can call this method whenever points change within this activity (e.g. sharing points leads to more share count).
         getProgress(this);
 
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.fabPoints:
+                sharePoints(v);
+                break;
+            case R.id.fabBadge:
+                new AlertDialog.Builder(AchievementsActivity.this)
+                        .setTitle("How to get badges")
+                        .setMessage("Get badges by earning 100 points, sharing 10 times, or making 10 notes.")
+                        .setCancelable(false)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                            }}).show();
+        }
+    }
+
     public void getProgress(Context context){
         int i = getPoints(context);
         textPoints.setText(String.valueOf(i));
         int shares = getShares(context);
-        textShared.setText("You have shared progress "+ String.valueOf(shares) + " times.");
+        textShared.setText("You have shared progress "+ String.valueOf(shares) + " times!");
         int notes = getNotes(context);
         textNotes.setText("You have written " + String.valueOf(notes) + " sets of notes!");
         if(i>=100){
