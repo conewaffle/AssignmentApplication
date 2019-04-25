@@ -11,7 +11,9 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "tutorial")
 public class Tutorial implements Parcelable {
 
-    @PrimaryKey @NonNull
+    @PrimaryKey (autoGenerate = true)
+    @NonNull
+    private int id;
     private String title;
     private String shortDesc;
     private String category;
@@ -24,7 +26,8 @@ public class Tutorial implements Parcelable {
 
     }
 
-    public Tutorial(String title, String shortDesc, String category, String vidLink, String tutorialBody, int completed) {
+    public Tutorial(int id, String title, String shortDesc, String category, String vidLink, String tutorialBody, int completed) {
+        this.id = id;
         this.title = title;
         this.shortDesc = shortDesc;
         this.category = category;
@@ -34,6 +37,7 @@ public class Tutorial implements Parcelable {
     }
 
     protected Tutorial(Parcel in) {
+        id = in.readInt();
         title = in.readString();
         shortDesc = in.readString();
         category = in.readString();
@@ -53,6 +57,14 @@ public class Tutorial implements Parcelable {
             return new Tutorial[size];
         }
     };
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
@@ -109,6 +121,7 @@ public class Tutorial implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
         dest.writeString(title);
         dest.writeString(shortDesc);
         dest.writeString(category);
