@@ -47,7 +47,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.MyViewHolder
             Tutorial mTutorial = mDataset.get(position);
 
             switch (v.getId()){
-                case R.id.topicLayout:
+                case R.id.cardTopic:
                     Intent tutorialIntent = new Intent(v.getContext(), TutorialVidActivity.class);
                     tutorialIntent.putExtra("TUTORIAL", mTutorial);
                     v.getContext().startActivity(tutorialIntent);
