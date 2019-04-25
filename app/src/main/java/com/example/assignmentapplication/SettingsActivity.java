@@ -55,7 +55,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 resetScores(v);
-                                Toast.makeText(SettingsActivity.this, "High Scores for all quizzes have now been reset. Your points are unaffected.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(SettingsActivity.this, "High Scores for all quizzes have now been reset. Your points are unaffected.", Toast.LENGTH_SHORT).show();
                             }})
                         .setNegativeButton(android.R.string.no, null).show();
                 break;
@@ -68,7 +68,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 int currentPoints = -1*(AchievementsActivity.getPoints(SettingsActivity.this));
                                 AchievementsActivity.addPoints(SettingsActivity.this, currentPoints);
-                                Toast.makeText(SettingsActivity.this, "Points have been reset.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(SettingsActivity.this, "Points have been reset.", Toast.LENGTH_SHORT).show();
                             }})
                         .setNegativeButton(android.R.string.no, null).show();
                 break;
@@ -80,7 +80,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 AchievementsActivity.resetCounts(SettingsActivity.this);
-                                Toast.makeText(SettingsActivity.this, "Progress counts have been reset.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(SettingsActivity.this, "Progress counts have been reset.", Toast.LENGTH_SHORT).show();
                             }})
                         .setNegativeButton(android.R.string.no, null).show();
                 break;
@@ -139,7 +139,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         @Override
         protected void onPostExecute(Void aVoid) {
             progDialog.dismiss();
-            Toast.makeText(SettingsActivity.this, "Notes Deleted", Toast.LENGTH_LONG).show();
+            Toast.makeText(SettingsActivity.this, "Notes Deleted", Toast.LENGTH_SHORT).show();
         }
     }
 
