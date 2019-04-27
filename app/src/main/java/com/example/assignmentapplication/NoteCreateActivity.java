@@ -43,7 +43,6 @@ public class NoteCreateActivity extends AppCompatActivity {
         if (intent.getStringExtra(TUTE_TOPIC)==null){
         } else {
             subjectEdit.setText(intent.getStringExtra(TUTE_TOPIC));
-            Toast.makeText(NoteCreateActivity.this, "You earned 10 points for finishing the tutorial!", Toast.LENGTH_SHORT).show();
             noteEdit.setHint("Write notes here on what you have just learnt!");
         }
 

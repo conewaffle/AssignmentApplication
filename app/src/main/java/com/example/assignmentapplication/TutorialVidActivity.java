@@ -61,6 +61,7 @@ public class TutorialVidActivity extends YouTubeBaseActivity implements YouTubeP
                     Toast.makeText(TutorialVidActivity.this, "You have not finished the video yet! Use back button to leave tutorial early.", Toast.LENGTH_LONG).show();
                 } else {
                     AchievementsActivity.addPoints(TutorialVidActivity.this, 10);
+                    Toast.makeText(TutorialVidActivity.this, "You earned 10 points for finishing the tutorial!", Toast.LENGTH_SHORT).show();
                     Intent noteIntent = new Intent(TutorialVidActivity.this, NoteCreateActivity.class);
                     noteIntent.putExtra(TUTE_TOPIC, vidTutorial.getTitle());
                     v.getContext().startActivity(noteIntent);
