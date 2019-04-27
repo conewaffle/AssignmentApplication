@@ -29,7 +29,7 @@ import static com.example.assignmentapplication.MasterQuizActivity.CATEGORY;
 //A lot of the code to do with quiz functionality has been learnt from https://codinginflow.com/tutorials/android/quiz-app-with-sqlite/
 //However, the code has been adapted for best practices e.g. ROOM Library instead of SQLite boilerplate code, and AsyncTasks for DB tasks
 // and other changes where required to suit our application.
-public class QuizActivity extends AppCompatActivity {
+public class QuizActivity extends AppCompatActivity implements View.OnClickListener{
 
     public static final String QUESTIONS_INITIALISED = "questionsInitialised";
     public static final String EXTRA_SCORE = "extraScore";
@@ -84,6 +84,10 @@ public class QuizActivity extends AppCompatActivity {
         rb2 = findViewById(R.id.answer2);
         rb3 = findViewById(R.id.answer3);
         rb4 = findViewById(R.id.answer4);
+        rb1.setOnClickListener(this);
+        rb2.setOnClickListener(this);
+        rb3.setOnClickListener(this);
+        rb4.setOnClickListener(this);
         buttonConfirm = findViewById(R.id.nextButton);
 
         textColorDefaultRb = rb1.getTextColors();
@@ -135,6 +139,11 @@ public class QuizActivity extends AppCompatActivity {
             }
 
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        buttonConfirm.setAlpha(1f);
     }
 
     private class InsertQuestionsTask extends AsyncTask<Void, Void, Void> {
@@ -231,6 +240,7 @@ public class QuizActivity extends AppCompatActivity {
         rb3.setTextColor(textColorDefaultRb);
         rb4.setTextColor(textColorDefaultRb);
         rbGroup.clearCheck();
+        buttonConfirm.setAlpha(0.3f);
 
         if(questionCounter<questionCountTotal){
             currentQuestion = questionList.get(questionCounter);
