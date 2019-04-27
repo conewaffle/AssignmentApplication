@@ -50,13 +50,14 @@
                 android:layout_height="match_parent"
                 android:layout_margin="6dp"
                 app:cardBackgroundColor="@color/common_google_signin_btn_text_dark_default"
-                app:cardCornerRadius="4dp">
+                app:cardCornerRadius="3dp">
 
                 <TextView
                     android:id="@+id/textShortDesc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
+                    android:padding="4dp"
                     android:text="Lesson Overview:"
                     android:textColor="@color/common_google_signin_btn_text_dark_focused" />
 
@@ -79,14 +80,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="6dp"
-                app:cardCornerRadius="4dp">
+                app:cardCornerRadius="3dp">
 
                 <TextView
                     android:id="@+id/textTutorialBody"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:padding="8dp"
+                    android:padding="4dp"
                     android:text="Body Text"
                     android:textColor="@android:color/black"
                     android:textSize="14sp" />
