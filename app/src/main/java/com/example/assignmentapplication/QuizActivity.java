@@ -98,6 +98,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
         setTitle(i.getStringExtra(CATEGORY) + " Quiz");
 
+        //handles orientation change.
         if(savedInstanceState==null) {
 
             SharedPreferences checkDbPrefs =  getSharedPreferences(QUESTIONS_INITIALISED, MODE_PRIVATE);
@@ -124,6 +125,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
 
+        //checks whether an answer has been selected.
         buttonConfirm.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -141,11 +143,13 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+    //upon selecting an answer, the opacity of the Next/Confirm button is restored.
     @Override
     public void onClick(View v) {
         buttonConfirm.setAlpha(1f);
     }
 
+    //on the first application run, inserts the questions into the ROOM database.
     private class InsertQuestionsTask extends AsyncTask<Void, Void, Void> {
 
         ProgressDialog progDialog = new ProgressDialog(QuizActivity.this);
@@ -199,6 +203,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    //gets the questions from the database.
     private class QueryQuestionsTask extends AsyncTask<String, Void, ArrayList<QuizQuestion>>{
 
         ProgressDialog progDialog = new ProgressDialog(QuizActivity.this);
@@ -233,7 +238,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
+    //clears any selections and sets content to that of the next question. If there are no more questions, finishes quiz.
     private void showNextQuestion(){
         rb1.setTextColor(textColorDefaultRb);
         rb2.setTextColor(textColorDefaultRb);
@@ -343,8 +348,9 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         } else{
             buttonConfirm.setText("Finish");
         }
-
     }
+
+    //finishes quiz by proceeding to result page. Results need to be sent through the result activity back to the original Starting Activity
     private void finishQuiz(){
         Intent intent = new Intent(QuizActivity.this, QuizResultActivity.class);
         intent.putExtra(EXTRA_SCORE, score);
@@ -355,7 +361,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         finish();
     }
 
-    //if wanting to treat cancelling as still finishing the quiz, use finishQuiz() instead of finish()
+    //cancelling quiz early will not count as an attempt. If we were to count them as attempt for sake of points we would use finishQuiz() instead.
     @Override
     public void onBackPressed(){
         if(backPressedTime+2000>System.currentTimeMillis()){
@@ -374,6 +380,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    //handles orientation change.
     @Override
     protected void onSaveInstanceState(Bundle outState){
         super.onSaveInstanceState(outState);
