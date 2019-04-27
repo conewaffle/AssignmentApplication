@@ -355,12 +355,11 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         finish();
     }
 
-    //if wanting to treat cancelling as still finishing the quiz, use finishQuiz() instead.
+    //if wanting to treat cancelling as still finishing the quiz, use finishQuiz() instead of finish()
     @Override
     public void onBackPressed(){
         if(backPressedTime+2000>System.currentTimeMillis()){
             finish();
-            //finishQuiz();
         } else {
             Toast.makeText(this, "Press back again to cancel quiz. No results will be saved.", Toast.LENGTH_SHORT).show();
         }
